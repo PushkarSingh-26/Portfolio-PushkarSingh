@@ -1,0 +1,23 @@
+title: Certutil Used to Download a File
+id: 5f3c7a1e-2b8d-4c61-9e0a-7d4b1f2e6a90
+status: experimental
+description: Detects certutil.exe run with the urlcache flag and a URL, a common way to download a payload with a built-in Windows tool.
+author: Pushkar Singh (example rule for portfolio)
+date: 2026-09-11
+tags:
+    - attack.command-and-control
+    - attack.t1105
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\certutil.exe'
+    selection_cli:
+        CommandLine|contains|all:
+            - 'urlcache'
+            - 'http'
+    condition: selection_img and selection_cli
+falsepositives:
+    - Administrators downloading files with certutil
+level: severe

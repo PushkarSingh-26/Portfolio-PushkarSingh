@@ -1,0 +1,349 @@
+@import "tailwindcss";
+
+/*
+  Next Token — design tokens
+  Paper and ink. Four pale tints encode the four capability areas everywhere
+  on the site (ML sky, LLM pollen, GenAI mint, Applied rose) and are only ever
+  used behind ink text or as strokes — never as large decorative fills.
+*/
+@theme static {
+  --color-paper: #f3f5f7;
+  --color-paper-2: #e8ecf1;
+  --color-paper-3: #dde3ea;
+  --color-ink: #14233a;
+  --color-ink-2: #4a5668;
+  --color-ink-3: #7a8596;
+  --color-rule: #d5dae1;
+  --color-caret: #2449ff;
+  --color-caret-soft: #c9d4ff;
+
+  --color-tint-ml: #cfe3ff;
+  --color-tint-llm: #ffe7a3;
+  --color-tint-genai: #c9efd9;
+  --color-tint-applied: #f6d2e0;
+  --color-tint-neutral: #e2e7ee;
+
+  --color-line-ml: #2f6fd6;
+  --color-line-llm: #a87a00;
+  --color-line-genai: #1d8a5c;
+  --color-line-applied: #b8406a;
+
+  --color-pass: #1f7a4d;
+  --color-fail: #b3261e;
+  --color-hold: #8a5a00;
+
+  --font-sans: var(--font-mona), ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --ease-decode: cubic-bezier(0.2, 0, 0, 1);
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1280px;
+  --nav-h: 56px;
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  font-feature-settings: "ss01", "calt";
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+::selection {
+  background: var(--color-caret-soft);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-caret);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Layout primitives ---------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.measure {
+  max-width: 64ch;
+}
+
+/* ---------- Type ---------- */
+
+.display-name {
+  font-weight: 780;
+  font-stretch: 100%;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  font-size: clamp(3.4rem, 12.5vw, 10.5rem);
+}
+
+.h-section {
+  font-weight: 720;
+  font-stretch: 112%;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  font-size: clamp(2.25rem, 5.2vw, 4rem);
+  text-wrap: balance;
+}
+
+.h-sub {
+  font-weight: 650;
+  font-stretch: 104%;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  font-size: clamp(1.3125rem, 2.2vw, 1.5rem);
+  text-wrap: balance;
+}
+
+.lead {
+  font-size: clamp(1.125rem, 1.8vw, 1.3125rem);
+  line-height: 1.5;
+  color: var(--color-ink);
+  text-wrap: pretty;
+}
+
+.body-2 {
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+}
+
+.small {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+/* Monospace is reserved for machine text: token IDs, YAML, CLI output, file names. */
+.mono {
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-size: 0.8125rem;
+  letter-spacing: 0;
+  font-variant-ligatures: none;
+}
+
+/* ---------- Links ---------- */
+
+.link {
+  color: var(--color-ink);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-caret) 45%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color 160ms var(--ease-decode), color 160ms var(--ease-decode);
+}
+
+.link:hover {
+  color: var(--color-caret);
+  text-decoration-color: var(--color-caret);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 44px;
+  padding: 0.55em 1.05em;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  transition:
+    background-color 160ms var(--ease-decode),
+    color 160ms var(--ease-decode),
+    border-color 160ms var(--ease-decode),
+    transform 120ms var(--ease-decode);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn-primary:hover {
+  background: var(--color-caret);
+}
+
+.btn-secondary {
+  border: 1.5px solid var(--color-ink);
+  color: var(--color-ink);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-caret);
+  color: var(--color-caret);
+}
+
+.btn-quiet {
+  color: var(--color-ink);
+  padding-inline: 0.7em;
+}
+
+.btn-quiet:hover {
+  background: var(--color-paper-2);
+}
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* ---------- Token spans (the site's core device) ---------- */
+
+.tok {
+  display: inline-flex;
+  align-items: baseline;
+  border-radius: 4px;
+  padding: 0.08em 0.38em;
+  line-height: 1.25;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.tok-ml {
+  background: var(--color-tint-ml);
+}
+.tok-llm {
+  background: var(--color-tint-llm);
+}
+.tok-genai {
+  background: var(--color-tint-genai);
+}
+.tok-applied {
+  background: var(--color-tint-applied);
+}
+.tok-neutral {
+  background: var(--color-tint-neutral);
+}
+
+/* Sub-token boundary inside a multi-token chip: a hairline, like a tokenizer view. */
+.tok-part {
+  margin-inline-start: 0.14em;
+  padding-inline-start: 0.14em;
+  border-inline-start: 1px solid color-mix(in srgb, var(--color-ink) 28%, transparent);
+}
+
+.tok-split {
+  display: inline-block;
+  width: 1px;
+  align-self: stretch;
+  margin-inline: 0.12em;
+  background: color-mix(in srgb, var(--color-ink) 22%, transparent);
+}
+
+/* ---------- Source citations ---------- */
+
+.cite {
+  font-size: 0.8125rem;
+  color: var(--color-ink-2);
+}
+
+.quote-mark {
+  border-left: 2px solid var(--color-rule);
+  padding-left: 0.9em;
+}
+
+/* ---------- Utilities ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 0.6em 1em;
+  border-radius: 6px;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.hairline {
+  border-color: var(--color-rule);
+}
+
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print: the /resume route and any page print as a clean document. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff;
+    font-size: 11pt;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "generatedAt": "2026-09-11T06:44:41+00:00",
+  "tooling": {
+    "sigmaCli": "3.1.0",
+    "pySigma": "1.5.0",
+    "splunkBackend": "2.1.0",
+    "convertCommand": "sigma convert -t splunk -p splunk_windows proc_creation_win_certutil_download.yml",
+    "checkCommand": "sigma check proc_creation_win_certutil_download.yml",
+    "python": "3.14.0"
+  },
+  "fieldCheckMethod": "Parse the rule's detection section, take every key of each selection (ignoring 'condition'), strip any modifiers after the first '|', and compare that set of field names with the set used by the valid reference rule: it passes only if nothing is missing and nothing is unexpected.",
+  "threatDescription": "Attackers run certutil.exe with -urlcache to download a payload from a remote URL.",
+  "variants": [
+    {
+      "id": "valid",
+      "label": "Valid rule",
+      "change": null,
+      "yaml": "title: Certutil Used to Download a File\nid: 5f3c7a1e-2b8d-4c61-9e0a-7d4b1f2e6a90\nstatus: experimental\ndescription: Detects certutil.exe run with the urlcache flag and a URL, a common way to download a payload with a built-in Windows tool.\nauthor: Pushkar Singh (example rule for portfolio)\ndate: 2026-09-11\ntags:\n    - attack.command-and-control\n    - attack.t1105\nlogsource:\n    category: process_creation\n    product: windows\ndetection:\n    selection_img:\n        Image|endswith: '\\certutil.exe'\n    selection_cli:\n        CommandLine|contains|all:\n            - 'urlcache'\n            - 'http'\n    condition: selection_img and selection_cli\nfalsepositives:\n    - Administrators downloading files with certutil\nlevel: high\n",
+      "checks": {
+        "schema": {
+          "pass": true,
+          "exitCode": 0,
+          "output": "Parsing Sigma rules\nChecking Sigma rules\n\n=== Summary ===\nFound 0 errors, 0 condition errors and 0 issues.\nNo rule errors found.\nNo condition errors found.\nNo validation issues found."
+        },
+        "compile": {
+          "pass": true,
+          "exitCode": 0,
+          "output": "Parsing Sigma rules\nImage=\"*\\\\certutil.exe\" CommandLine=\"*urlcache*\" CommandLine=\"*http*\""
+        },
+        "fields": {
+          "pass": true,
+          "used": [
+            "CommandLine",
+            "Image"
+          ],
+          "expected": [
+            "CommandLine",
+            "Image"
+          ],
+          "missing": [],
+          "unexpected": []
+        }
+      }
+    },
+    {
+      "id": "schema",
+      "label": "Schema error",
+      "change": "The severity level is set to 'severe', which is not one of Sigma's allowed levels (informational, low, medium, high, critical).",
+      "yaml": "title: Certutil Used to Download a File\nid: 5f3c7a1e-2b8d-4c61-9e0a-7d4b1f2e6a90\nstatus: experimental\ndescription: Detects certutil.exe run with the urlcache flag and a URL, a common way to download a payload with a built-in Windows tool.\nauthor: Pushkar Singh (example rule for portfolio)\ndate: 2026-09-11\ntags:\n    - attack.command-and-control\n    - attack.t1105\nlogsource:\n    category: process_creation\n    product: windows\ndetection:\n    selection_img:\n        Image|endswith: '\\certutil.exe'\n    selection_cli:\n        CommandLine|contains|all:\n            - 'urlcache'\n            - 'http'\n    condition: selection_img and selection_cli\nfalsepositives:\n    - Administrators downloading files with certutil\nlevel: severe\n",
+      "checks": {
+        "schema": {
+          "pass": false,
+          "exitCode": 1,
+          "output": "Parsing Sigma rules\n=== Sigma Rule Errors ===\n'severe' is not a valid Sigma rule level in proc_creation_win_certutil_download.yml\nChecking Sigma rules\n\n=== Summary ===\nFound 1 errors, 0 condition errors and 0 issues.\n\nRule error summary:\n+-------+-----------------+\n| Count | Rule Error      |\n+-------+-----------------+\n| 1     | SigmaLevelError |\n+-------+-----------------+\nNo condition errors found.\nNo validation issues found.\nCheck failure"
+        },
+        "compile": {
+          "pass": false,
+          "exitCode": 1,
+          "output": "Parsing Sigma rules\nErrors found in Sigma rules:\n* 'severe' is not a valid Sigma rule level in proc_creation_win_certutil_download.yml\nError: Errors found in Sigma rules. Please check the output above."
+        },
+        "fields": {
+          "pass": true,
+          "used": [
+            "CommandLine",
+            "Image"
+          ],
+          "expected": [
+            "CommandLine",
+            "Image"
+          ],
+          "missing": [],
+          "unexpected": []
+        }
+      }
+    },
+    {
+      "id": "compile",
+      "label": "Compile error",
+      "change": "The Image match uses a placeholder (Image|expand: '%certutil_path%') that no processing pipeline defines, so the Splunk backend cannot turn it into a query.",
+      "yaml": "title: Certutil Used to Download a File\nid: 5f3c7a1e-2b8d-4c61-9e0a-7d4b1f2e6a90\nstatus: experimental\ndescription: Detects certutil.exe run with the urlcache flag and a URL, a common way to download a payload with a built-in Windows tool.\nauthor: Pushkar Singh (example rule for portfolio)\ndate: 2026-09-11\ntags:\n    - attack.command-and-control\n    - attack.t1105\nlogsource:\n    category: process_creation\n    product: windows\ndetection:\n    selection_img:\n        Image|expand: '%certutil_path%'\n    selection_cli:\n        CommandLine|contains|all:\n            - 'urlcache'\n            - 'http'\n    condition: selection_img and selection_cli\nfalsepositives:\n    - Administrators downloading files with certutil\nlevel: high\n",
+      "checks": {
+        "schema": {
+          "pass": true,
+          "exitCode": 0,
+          "output": "Parsing Sigma rules\nChecking Sigma rules\n\n=== Summary ===\nFound 0 errors, 0 condition errors and 0 issues.\nNo rule errors found.\nNo condition errors found.\nNo validation issues found."
+        },
+        "compile": {
+          "pass": false,
+          "exitCode": 1,
+          "output": "Parsing Sigma rules\nError: Error while converting: Attempt to convert unhandled placeholder 'certutil_path' into query."
+        },
+        "fields": {
+          "pass": true,
+          "used": [
+            "CommandLine",
+            "Image"
+          ],
+          "expected": [
+            "CommandLine",
+            "Image"
+          ],
+          "missing": [],
+          "unexpected": []
+        }
+      }
+    },
+    {
+      "id": "fields",
+      "label": "Wrong field name",
+      "change": "The field CommandLine is renamed to the plausible-looking but wrong CommandLineArgs.",
+      "yaml": "title: Certutil Used to Download a File\nid: 5f3c7a1e-2b8d-4c61-9e0a-7d4b1f2e6a90\nstatus: experimental\ndescription: Detects certutil.exe run with the urlcache flag and a URL, a common way to download a payload with a built-in Windows tool.\nauthor: Pushkar Singh (example rule for portfolio)\ndate: 2026-09-11\ntags:\n    - attack.command-and-control\n    - attack.t1105\nlogsource:\n    category: process_creation\n    product: windows\ndetection:\n    selection_img:\n        Image|endswith: '\\certutil.exe'\n    selection_cli:\n        CommandLineArgs|contains|all:\n            - 'urlcache'\n            - 'http'\n    condition: selection_img and selection_cli\nfalsepositives:\n    - Administrators downloading files with certutil\nlevel: high\n",
+      "checks": {
+        "schema": {
+          "pass": true,
+          "exitCode": 0,
+          "output": "Parsing Sigma rules\nChecking Sigma rules\n\n=== Summary ===\nFound 0 errors, 0 condition errors and 0 issues.\nNo rule errors found.\nNo condition errors found.\nNo validation issues found."
+        },
+        "compile": {
+          "pass": true,
+          "exitCode": 0,
+          "output": "Parsing Sigma rules\nImage=\"*\\\\certutil.exe\" CommandLineArgs=\"*urlcache*\" CommandLineArgs=\"*http*\""
+        },
+        "fields": {
+          "pass": false,
+          "used": [
+            "CommandLineArgs",
+            "Image"
+          ],
+          "expected": [
+            "CommandLine",
+            "Image"
+          ],
+          "missing": [
+            "CommandLine"
+          ],
+          "unexpected": [
+            "CommandLineArgs"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "algorithm": "xgboost",
+  "version": "v1",
+  "model_version": "risk-xgboost-v1",
+  "trained_at": "2026-06-16T06:18:49.839526+00:00",
+  "n_samples": 1291,
+  "feature_columns": [
+    "cvss_score",
+    "severity_ordinal",
+    "published_age_days",
+    "description_length",
+    "max_confidence",
+    "avg_confidence",
+    "num_mappings",
+    "num_high_confidence",
+    "distinct_tactics",
+    "technique_popularity",
+    "is_critical",
+    "is_high_confidence",
+    "correlation_density"
+  ],
+  "metrics": {
+    "r2": 0.9986,
+    "mae": 0.1318,
+    "rmse": 0.3393
+  },
+  "feature_importances": [
+    {
+      "feature": "cvss_score",
+      "importance": 0.3771
+    },
+    {
+      "feature": "severity_ordinal",
+      "importance": 0.3606
+    },
+    {
+      "feature": "technique_popularity",
+      "importance": 0.0556
+    },
+    {
+      "feature": "max_confidence",
+      "importance": 0.0545
+    },
+    {
+      "feature": "num_high_confidence",
+      "importance": 0.0503
+    },
+    {
+      "feature": "num_mappings",
+      "importance": 0.0495
+    },
+    {
+      "feature": "distinct_tactics",
+      "importance": 0.016
+    },
+    {
+      "feature": "avg_confidence",
+      "importance": 0.0131
+    },
+    {
+      "feature": "is_high_confidence",
+      "importance": 0.0118
+    },
+    {
+      "feature": "correlation_density",
+      "importance": 0.008
+    },
+    {
+      "feature": "is_critical",
+      "importance": 0.002
+    },
+    {
+      "feature": "published_age_days",
+      "importance": 0.0012
+    },
+    {
+      "feature": "description_length",
+      "importance": 0.0004
+    }
+  ],
+  "score_distribution": {
+    "0-20": 0,
+    "20-40": 13,
+    "40-60": 434,
+    "60-80": 835,
+    "80-100": 9
+  },
+  "level_distribution": {
+    "CRITICAL": 88,
+    "HIGH": 1089,
+    "MEDIUM": 114,
+    "LOW": 0
+  }
+}

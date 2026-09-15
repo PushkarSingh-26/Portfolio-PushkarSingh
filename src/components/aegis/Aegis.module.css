@@ -1,0 +1,327 @@
+/* AegisAI home section + case study (static parts). */
+
+.intro {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 64rem) {
+  .intro {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 2.5rem;
+    align-items: end;
+  }
+
+  .introHead {
+    grid-column: 1 / span 7;
+  }
+
+  .principles {
+    grid-column: 8 / span 5;
+  }
+}
+
+.principlesTitle {
+  font-weight: 650;
+  font-stretch: 104%;
+}
+
+.principleList {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+.principle {
+  padding: 0.625rem 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.principleText {
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.principleMeta {
+  margin-top: 0.125rem;
+  color: var(--color-ink-2);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ---------- Case study ---------- */
+
+.sectionHead {
+  max-width: 64ch;
+}
+
+.sectionLead {
+  margin-top: 1.25rem;
+}
+
+/* Pipeline overview: a numbered track with the LLM lane and the human step marked. */
+.pipeline {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  max-width: 64rem;
+}
+
+.pStage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.5rem 1.75rem minmax(0, 1fr);
+  gap: 0 0.5rem;
+  padding: 0.75rem 0;
+}
+
+.pStage::before {
+  content: "";
+  position: absolute;
+  left: calc(0.75rem - 0.75px);
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--color-ink);
+}
+
+.pStage:first-child::before {
+  top: 1.25rem;
+}
+
+.pStage:last-child::before {
+  bottom: calc(100% - 1.25rem);
+}
+
+.pDot {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  margin-top: 0.45rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  border: 2px solid var(--color-paper);
+  box-sizing: content-box;
+}
+
+.pNo {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-2);
+  padding-top: 0.05rem;
+}
+
+.pBody {
+  display: grid;
+  gap: 0.125rem 1.5rem;
+  min-width: 0;
+}
+
+@media (min-width: 48rem) {
+  .pBody {
+    grid-template-columns: 11rem minmax(0, 1fr) minmax(0, 13rem);
+    align-items: baseline;
+  }
+}
+
+.pName {
+  font-weight: 650;
+}
+
+.pText {
+  color: var(--color-ink-2);
+}
+
+.pComponent {
+  color: var(--color-ink-2);
+  overflow-wrap: anywhere;
+}
+
+.pNote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.5rem;
+  margin-top: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--color-ink);
+}
+
+@media (min-width: 48rem) {
+  .pNote {
+    grid-column: 2 / span 2;
+  }
+}
+
+.pLane {
+  border-left: 3px solid var(--color-line-llm);
+  padding-left: 0.625rem;
+}
+
+.pPerson {
+  border-left: 3px solid var(--color-ink);
+  padding-left: 0.625rem;
+  font-weight: 600;
+}
+
+.threeCol {
+  display: grid;
+  gap: 3rem 2.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 64rem) {
+  .threeCol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.block {
+  min-width: 0;
+}
+
+.blockBody {
+  margin-top: 0.75rem;
+}
+
+.quoteStack {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.toolTokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+
+.toolToken {
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--color-ink);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-size: 0.6875rem;
+}
+
+.providerList {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.providerRow {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.twoCol {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 64rem) {
+  .twoCol {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 2.5rem;
+  }
+
+  .colMain {
+    grid-column: 1 / span 5;
+  }
+
+  .colSide {
+    grid-column: 7 / span 6;
+  }
+}
+
+.container {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+.auditFields {
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+}
+
+.stackGrid {
+  display: grid;
+  gap: 2rem 2.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 40rem) {
+  .stackGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .stackGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.stackGroup h3 {
+  font-weight: 650;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.stackList {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.stackItem {
+  padding: 0.3rem 0;
+}
+
+.stackSource {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-ink-2);
+}
+
+.limits {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0 2.5rem;
+  max-width: 72rem;
+}
+
+@media (min-width: 64rem) {
+  .limits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.limit {
+  padding: 0.875rem 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.limitText {
+  font-weight: 560;
+  line-height: 1.45;
+  max-width: 56ch;
+}

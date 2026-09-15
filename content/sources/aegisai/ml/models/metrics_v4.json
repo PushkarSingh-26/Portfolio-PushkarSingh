@@ -1,0 +1,144 @@
+{
+  "algorithm": "xgboost",
+  "version": "v4",
+  "model_version": "risk-xgboost-v4",
+  "trained_at": "2026-06-17T08:47:03.820299+00:00",
+  "n_samples": 1291,
+  "feature_columns": [
+    "cvss_score",
+    "severity_ordinal",
+    "published_age_days",
+    "description_length",
+    "max_confidence",
+    "avg_confidence",
+    "num_mappings",
+    "num_high_confidence",
+    "distinct_tactics",
+    "technique_popularity",
+    "is_critical",
+    "is_high_confidence",
+    "correlation_density",
+    "epss_score",
+    "epss_percentile",
+    "kev_present",
+    "kev_age_days",
+    "misp_actor_linked",
+    "misp_actor_count",
+    "misp_max_actor_conf",
+    "wazuh_observed",
+    "wazuh_alert_count",
+    "wazuh_max_level"
+  ],
+  "metrics": {
+    "r2": 0.9908,
+    "mae": 0.2961,
+    "rmse": 0.8242
+  },
+  "feature_importances": [
+    {
+      "feature": "misp_actor_linked",
+      "importance": 0.1658
+    },
+    {
+      "feature": "num_high_confidence",
+      "importance": 0.1388
+    },
+    {
+      "feature": "wazuh_observed",
+      "importance": 0.1146
+    },
+    {
+      "feature": "kev_present",
+      "importance": 0.1108
+    },
+    {
+      "feature": "wazuh_alert_count",
+      "importance": 0.1088
+    },
+    {
+      "feature": "wazuh_max_level",
+      "importance": 0.0831
+    },
+    {
+      "feature": "misp_actor_count",
+      "importance": 0.0668
+    },
+    {
+      "feature": "kev_age_days",
+      "importance": 0.0474
+    },
+    {
+      "feature": "is_critical",
+      "importance": 0.0298
+    },
+    {
+      "feature": "severity_ordinal",
+      "importance": 0.0249
+    },
+    {
+      "feature": "cvss_score",
+      "importance": 0.0238
+    },
+    {
+      "feature": "technique_popularity",
+      "importance": 0.0193
+    },
+    {
+      "feature": "avg_confidence",
+      "importance": 0.0147
+    },
+    {
+      "feature": "num_mappings",
+      "importance": 0.0121
+    },
+    {
+      "feature": "max_confidence",
+      "importance": 0.0105
+    },
+    {
+      "feature": "epss_score",
+      "importance": 0.0105
+    },
+    {
+      "feature": "epss_percentile",
+      "importance": 0.0102
+    },
+    {
+      "feature": "correlation_density",
+      "importance": 0.006
+    },
+    {
+      "feature": "misp_max_actor_conf",
+      "importance": 0.0011
+    },
+    {
+      "feature": "distinct_tactics",
+      "importance": 0.0004
+    },
+    {
+      "feature": "description_length",
+      "importance": 0.0002
+    },
+    {
+      "feature": "published_age_days",
+      "importance": 0.0001
+    },
+    {
+      "feature": "is_high_confidence",
+      "importance": 0.0
+    }
+  ],
+  "score_distribution": {
+    "0-20": 1,
+    "20-40": 252,
+    "40-60": 966,
+    "60-80": 64,
+    "80-100": 8
+  },
+  "level_distribution": {
+    "CRITICAL": 8,
+    "HIGH": 384,
+    "MEDIUM": 882,
+    "LOW": 17
+  }
+}

@@ -1,0 +1,532 @@
+# --- markdown cell 0 ---
+# **1) IMPORT LIABRARIES**
+# --- output of cell 2 ---
+Mounted at /content/drive
+
+# --- output of cell 3 ---
+Mounted at /content/drive
+
+# --- markdown cell 4 ---
+# **2**. Upload Datasets For Stock Data And News Headlines
+
+# --- markdown cell 6 ---
+# **3. Data Cleaning**
+
+# --- output of cell 7 ---
+         Date         Open         High          Low        Close  \
+0  2001-01-02  3953.219971  4028.570068  3929.370117  4018.879883   
+1  2001-01-03  3977.580078  4067.659912  3977.580078  4060.020020   
+2  2001-01-04  4180.970215  4180.970215  4109.549805  4115.370117   
+3  2001-01-05  4116.339844  4195.009766  4115.350098  4183.729980   
+4  2001-01-08  4164.759766  4206.720215  4101.529785  4120.430176   
+
+     Adj Close  Volume  
+0  4018.879883     0.0  
+1  4060.020020     0.0  
+2  4115.370117     0.0  
+3  4183.729980     0.0  
+4  4120.430176     0.0  
+# --- output of cell 8 ---
+   publish_date headline_category  \
+0      20010102           unknown   
+1      20010102           unknown   
+2      20010102           unknown   
+3      20010102           unknown   
+4      20010102           unknown   
+
+                                       headline_text  
+0  Status quo will not be disturbed at Ayodhya; s...  
+1                Fissures in Hurriyat over Pak visit  
+2              America's unwanted heading for India?  
+3                 For bigwigs; it is destination Goa  
+4               Extra buses to clear tourist traffic  
+# --- output of cell 9 ---
+(5043, 3424067)
+# --- output of cell 10 ---
+(Date         False
+ Open          True
+ High          True
+ Low           True
+ Close         True
+ Adj Close     True
+ Volume        True
+ dtype: bool,
+ publish_date         False
+ headline_category    False
+ headline_text        False
+ dtype: bool)
+# --- markdown cell 11 ---
+## `3.2 STOCK TEXTUAL DATA`
+# --- output of cell 12 ---
+                   Close          Open          High           Low   Volume
+Date                                                                       
+2001-01-02   4018.879883   3953.219971   4028.570068   3929.370117      0.0
+2001-01-03   4060.020020   3977.580078   4067.659912   3977.580078      0.0
+2001-01-04   4115.370117   4180.970215   4180.970215   4109.549805      0.0
+2001-01-05   4183.729980   4116.339844   4195.009766   4115.350098      0.0
+2001-01-08   4120.430176   4164.759766   4206.720215   4101.529785      0.0
+...                  ...           ...           ...           ...      ...
+2021-03-01  49849.839844  49747.710938  50058.421875  49440.460938  18400.0
+2021-03-02  50296.890625  50258.089844  50439.820313  49807.121094  17500.0
+2021-03-03  51444.648438  50738.210938  51539.890625  50512.839844  15800.0
+2021-03-04  50846.078125  50812.140625  51256.550781  50539.921875  21800.0
+2021-03-05  50405.320313  50517.359375  50886.191406  50160.539063  19200.0
+
+[5043 rows x 5 columns]
+# --- markdown cell 13 ---
+# 3.2. Textual News Headlines Data
+
+# --- output of cell 14 ---
+                                                  headline_text
+publish_date                                                   
+2001-01-02    Status quo will not be disturbed at Ayodhya; s...
+2001-01-03    Powerless north India gropes in the dark,Think...
+2001-01-04    The string that pulled Stephen Hawking to Indi...
+2001-01-05    Light combat craft takes India into club class...
+2001-01-06    Light combat craft takes India into club class...
+...                                                         ...
+2020-12-27    #BigInterview! Dhritiman Chatterjee: Nobody da...
+2020-12-28    Horoscope Today; 28 December 2020: Check astro...
+2020-12-29    Man recovers charred remains of 'thief' from h...
+2020-12-30    Numerology Readings 30 December 2020: Predicti...
+2020-12-31    Horoscope Today; 31 December 2020: Check astro...
+
+[7262 rows x 1 columns]
+# --- markdown cell 15 ---
+# 4. Combine Stock Data
+
+# --- output of cell 16 ---
+                   Close          Open          High           Low   Volume  \
+2001-01-02   4018.879883   3953.219971   4028.570068   3929.370117      0.0   
+2001-01-03   4060.020020   3977.580078   4067.659912   3977.580078      0.0   
+2001-01-04   4115.370117   4180.970215   4180.970215   4109.549805      0.0   
+2001-01-05   4183.729980   4116.339844   4195.009766   4115.350098      0.0   
+2001-01-08   4120.430176   4164.759766   4206.720215   4101.529785      0.0   
+...                  ...           ...           ...           ...      ...   
+2020-12-24  46973.539063  46743.488281  47053.398438  46539.019531  13700.0   
+2020-12-28  47353.750000  47153.589844  47406.718750  47148.238281   9600.0   
+2020-12-29  47613.078125  47466.621094  47714.550781  47361.898438  12800.0   
+2020-12-30  47746.218750  47789.031250  47807.851563  47358.359375  15600.0   
+2020-12-31  47751.328125  47753.109375  47896.968750  47602.121094  13900.0   
+
+                                                headline_text  
+2001-01-02  Status quo will not be disturbed at Ayodhya; s...  
+2001-01-03  Powerless north India gropes in the dark,Think...  
+2001-01-04  The string that pulled Stephen Hawking to Indi...  
+2001-01-05  Light combat craft takes India into club class...  
+2001-01-08  Sangh Parivar; Babri panel up the ante,Frontru...  
+...                                                       ...  
+2020-12-24  How to set the mood for sex during cold winter...  
+2020-12-28  Horoscope Today; 28 Decembe
+# --- output of cell 17 ---
+                   Close          Open          High           Low   Volume  \
+2001-01-02   4018.879883   3953.219971   4028.570068   3929.370117      0.0   
+2001-01-03   4060.020020   3977.580078   4067.659912   3977.580078      0.0   
+2001-01-04   4115.370117   4180.970215   4180.970215   4109.549805      0.0   
+2001-01-05   4183.729980   4116.339844   4195.009766   4115.350098      0.0   
+2001-01-08   4120.430176   4164.759766   4206.720215   4101.529785      0.0   
+...                  ...           ...           ...           ...      ...   
+2020-12-24  46973.539063  46743.488281  47053.398438  46539.019531  13700.0   
+2020-12-28  47353.750000  47153.589844  47406.718750  47148.238281   9600.0   
+2020-12-29  47613.078125  47466.621094  47714.550781  47361.898438  12800.0   
+2020-12-30  47746.218750  47789.031250  47807.851563  47358.359375  15600.0   
+2020-12-31  47751.328125  47753.109375  47896.968750  47602.121094  13900.0   
+
+                                                headline_text  
+2001-01-02  Status quo will not be disturbed at Ayodhya; s...  
+2001-01-03  Powerless north India gropes in the dark,Think...  
+2001-01-04  The string that pulled Stephen Hawking to Indi...  
+2001-01-05  Light combat craft takes India into club class...  
+2001-01-08  Sangh Parivar; Babri panel up the ante,Frontru...  
+...                                                       ...  
+2020-12-24  How to set the mood for sex during cold winter...  
+2020-12-28  Horoscope Today; 28 Decembe
+# --- markdown cell 18 ---
+# 5. Sentiment Analysis
+
+# --- output of cell 19 ---
+                  Close         Open         High          Low  Volume  \
+2001-01-02  4018.879883  3953.219971  4028.570068  3929.370117     0.0   
+2001-01-03  4060.020020  3977.580078  4067.659912  3977.580078     0.0   
+2001-01-04  4115.370117  4180.970215  4180.970215  4109.549805     0.0   
+2001-01-05  4183.729980  4116.339844  4195.009766  4115.350098     0.0   
+2001-01-08  4120.430176  4164.759766  4206.720215  4101.529785     0.0   
+
+                                                headline_text compound  \
+2001-01-02  Status quo will not be disturbed at Ayodhya; s...            
+2001-01-03  Powerless north India gropes in the dark,Think...            
+2001-01-04  The string that pulled Stephen Hawking to Indi...            
+2001-01-05  Light combat craft takes India into club class...            
+2001-01-08  Sangh Parivar; Babri panel up the ante,Frontru...            
+
+           negative neutral positive  
+2001-01-02                            
+2001-01-03                            
+2001-01-04                            
+2001-01-05                            
+2001-01-08                            
+# --- output of cell 20 ---
+[nltk_data] Downloading package vader_lexicon to /root/nltk_data...
+
+# --- output of cell 20 ---
+True
+# --- output of cell 21 ---
+                  Close         Open         High          Low  Volume  \
+2001-01-02  4018.879883  3953.219971  4028.570068  3929.370117     0.0   
+2001-01-03  4060.020020  3977.580078  4067.659912  3977.580078     0.0   
+2001-01-04  4115.370117  4180.970215  4180.970215  4109.549805     0.0   
+2001-01-05  4183.729980  4116.339844  4195.009766  4115.350098     0.0   
+2001-01-08  4120.430176  4164.759766  4206.720215  4101.529785     0.0   
+
+                                                headline_text  compound  \
+2001-01-02  Status quo will not be disturbed at Ayodhya; s...   -0.9621   
+2001-01-03  Powerless north India gropes in the dark,Think...    0.6322   
+2001-01-04  The string that pulled Stephen Hawking to Indi...    0.6648   
+2001-01-05  Light combat craft takes India into club class...    0.9253   
+2001-01-08  Sangh Parivar; Babri panel up the ante,Frontru...   -0.9638   
+
+            negative  neutral  positive  
+2001-01-02     0.119    0.817     0.064  
+2001-01-03     0.084    0.817     0.098  
+2001-01-04     0.077    0.843     0.080  
+2001-01-05     0.104    0.744     0.152  
+2001-01-08     0.119    0.855     0.026  
+# --- output of cell 22 ---
+                  Close  compound  negative  neutral  positive         Open  \
+Date                                                                          
+2001-01-02  4018.879883   -0.9621     0.119    0.817     0.064  3953.219971   
+2001-01-03  4060.020020    0.6322     0.084    0.817     0.098  3977.580078   
+2001-01-04  4115.370117    0.6648     0.077    0.843     0.080  4180.970215   
+2001-01-05  4183.729980    0.9253     0.104    0.744     0.152  4116.339844   
+2001-01-08  4120.430176   -0.9638     0.119    0.855     0.026  4164.759766   
+
+                   High          Low  Volume  
+Date                                          
+2001-01-02  4028.570068  3929.370117     0.0  
+2001-01-03  4067.659912  3977.580078     0.0  
+2001-01-04  4180.970215  4109.549805     0.0  
+2001-01-05  4195.009766  4115.350098     0.0  
+2001-01-08  4206.720215  4101.529785     0.0  
+# --- markdown cell 24 ---
+# 6. Exploratory Data Analysis
+
+# --- output of cell 25 ---
+(4893, 9)
+# --- output of cell 26 ---
+Close       False
+compound    False
+negative    False
+neutral     False
+positive    False
+Open        False
+High        False
+Low         False
+Volume      False
+dtype: bool
+# --- output of cell 27 ---
+              Close     compound     negative      neutral     positive  \
+count   4893.000000  4893.000000  4893.000000  4893.000000  4893.000000   
+mean   18685.761055    -0.877377     0.126786     0.786600     0.086609   
+std    11233.725489     0.441674     0.024094     0.032986     0.020853   
+min     2600.120117    -1.000000     0.000000     0.000000     0.000000   
+25%     8929.440430    -0.999800     0.113000     0.766000     0.076000   
+50%    17618.349609    -0.999200     0.128000     0.783000     0.086000   
+75%    27288.169922    -0.994800     0.142000     0.804000     0.097000   
+max    47751.328125     1.000000     0.444000     1.000000     0.608000   
+
+               Open          High           Low        Volume  
+count   4893.000000   4893.000000   4893.000000  4.893000e+03  
+mean   18706.141903  18818.841446  18557.102644  8.070914e+04  
+std    11250.819220  11290.044725  11181.713549  1.069967e+06  
+min     2621.889893   2682.590088   2594.870117  0.000000e+00  
+25%     8939.379883   9033.990234   8799.009766  9.400000e+03  
+50%    17650.820313  17769.250000  17500.789063  1.400000e+04  
+75%    27316.429688  27445.240234  27159.449219  2.080000e+04  
+max    47789.031250  47896.968750  47602.121094  3.181510e+07  
+# --- output of cell 28 ---
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 4893 entries, 2001-01-02 to 2020-12-31
+Data columns (total 9 columns):
+ #   Column    Non-Null Count  Dtype  
+---  ------    --------------  -----  
+ 0   Close     4893 non-null   float64
+ 1   compound  4893 non-null   float64
+ 2   negative  4893 non-null   float64
+ 3   neutral   4893 non-null   float64
+ 4   positive  4893 non-null   float64
+ 5   Open      4893 non-null   float64
+ 6   High      4893 non-null   float64
+ 7   Low       4893 non-null   float64
+ 8   Volume    4893 non-null   float64
+dtypes: float64(9)
+memory usage: 382.3 KB
+
+# --- output of cell 29 ---
+Text(0, 0.5, 'Close Price ($)')
+# --- output of cell 29 ---
+<Figure size 2000x1000 with 1 Axes>
+# --- output of cell 30 ---
+                  Close  compound  negative   neutral  positive         Open  \
+Date                                                                           
+2001-01-02          NaN       NaN       NaN       NaN       NaN          NaN   
+2001-01-03          NaN       NaN       NaN       NaN       NaN          NaN   
+2001-01-04          NaN       NaN       NaN       NaN       NaN          NaN   
+2001-01-05          NaN       NaN       NaN       NaN       NaN          NaN   
+2001-01-08          NaN       NaN       NaN       NaN       NaN          NaN   
+2001-01-09          NaN       NaN       NaN       NaN       NaN          NaN   
+2001-01-10  4095.911447 -0.175914  0.121571  0.810143  0.068000  4094.170027   
+2001-01-23  4135.598598  0.094314  0.109714  0.818286  0.071714  4140.542899   
+2001-01-24  4173.655727 -0.125129  0.111429  0.825000  0.063429  4189.532854   
+2001-01-25  4204.348598 -0.360643  0.119857  0.817429  0.062429  4210.514230   
+2001-01-29  4211.611433 -0.354300  0.110857  0.829571  0.059143  4216.588518   
+2001-01-30  4247.555699 -0.339186  0.110571  0.822857  0.066143  4231.538574   
+2001-01-31  4276.328578 -0.282500  0.107000  0.825857  0.066857  4267.658552   
+2001-02-01  4310.395717 -0.319400  0.089571  0.833857  0.076286  4289.308524   
+2001-02-02  4318.334263 -0.313714  0.094143  0.811000  0.094571  4289.755650   
+2001-02-05  4324.627162 -0.109343  0.097286  0.793286  0.109143  4292.185686   
+2001-02-06  4331.065709  0.140486  0.087000  0.799286  0.113
+# --- output of cell 31 ---
+<Axes: xlabel='Date'>
+# --- output of cell 31 ---
+<Figure size 1600x1000 with 1 Axes>
+# --- markdown cell 32 ---
+Blue -> Closed Price ,
+Orange -> Rolling mean
+
+# --- markdown cell 33 ---
+# 7. Data Preparation
+
+# --- output of cell 34 ---
+Number of records in Training Data: 3913
+Number of records in Test Data: 980
+
+# --- output of cell 35 ---
+Close Price:
+Date
+2001-01-03     4060.020020
+2001-01-04     4115.370117
+2001-01-05     4183.729980
+2001-01-08     4120.430176
+2001-01-09     4125.310059
+                  ...     
+2020-12-24    46973.539063
+2020-12-28    47353.750000
+2020-12-29    47613.078125
+2020-12-30    47746.218750
+2020-12-31    47751.328125
+Name: Close, Length: 4892, dtype: float64
+
+# --- output of cell 36 ---
+            close_price  close_price_shifted  compound  compound_shifted  \
+Date                                                                       
+2001-01-03  4060.020020          4115.370117    0.6322            0.6648   
+2001-01-04  4115.370117          4183.729980    0.6648            0.9253   
+2001-01-05  4183.729980          4120.430176    0.9253           -0.9638   
+2001-01-08  4120.430176          4125.310059   -0.9638           -0.9559   
+2001-01-09  4125.310059          4047.639893   -0.9559           -0.5719   
+2001-01-10  4047.639893          4296.689941   -0.5719            0.9295   
+2001-01-23  4296.689941          4326.419922    0.9295           -0.9039   
+2001-01-24  4326.419922          4330.220215   -0.9039           -0.9838   
+2001-01-25  4330.220215          4234.569824   -0.9838            0.9697   
+2001-01-29  4234.569824          4372.040039    0.9697           -0.8580   
+
+            volume   open_price         high          low  
+Date                                                       
+2001-01-03     0.0  3977.580078  4067.659912  3977.580078  
+2001-01-04     0.0  4180.970215  4180.970215  4109.549805  
+2001-01-05     0.0  4116.339844  4195.009766  4115.350098  
+2001-01-08     0.0  4164.759766  4206.720215  4101.529785  
+2001-01-09     0.0  4114.740234  4166.839844  4101.009766  
+2001-01-10     0.0  4151.580078  4155.859863  4035.439941  
+2001-01-23     0.0  4277.830078  4321.750000  4272.870117  
+2001-01-24     0.0  4320.509766  4339.410156  4
+# --- markdown cell 37 ---
+# 7.1. Setting Target Variable And Feature Dataset
+
+
+
+# --- output of cell 38 ---
+Date
+2001-01-03     4115.370117
+2001-01-04     4183.729980
+2001-01-05     4120.430176
+2001-01-08     4125.310059
+2001-01-09     4047.639893
+                  ...     
+2020-12-23    46973.539063
+2020-12-24    47353.750000
+2020-12-28    47613.078125
+2020-12-29    47746.218750
+2020-12-30    47751.328125
+Name: close_price_shifted, Length: 4891, dtype: float64
+# --- output of cell 39 ---
+             close_price  compound  compound_shifted   volume    open_price  \
+Date                                                                          
+2001-01-03   4060.020020    0.6322            0.6648      0.0   3977.580078   
+2001-01-04   4115.370117    0.6648            0.9253      0.0   4180.970215   
+2001-01-05   4183.729980    0.9253           -0.9638      0.0   4116.339844   
+2001-01-08   4120.430176   -0.9638           -0.9559      0.0   4164.759766   
+2001-01-09   4125.310059   -0.9559           -0.5719      0.0   4114.740234   
+...                  ...       ...               ...      ...           ...   
+2020-12-23  46444.179688   -0.9996           -0.9971  10500.0  46072.300781   
+2020-12-24  46973.539063   -0.9971           -0.9997  13700.0  46743.488281   
+2020-12-28  47353.750000   -0.9997           -0.9998   9600.0  47153.589844   
+2020-12-29  47613.078125   -0.9998           -0.9998  12800.0  47466.621094   
+2020-12-30  47746.218750   -0.9998           -0.9996  15600.0  47789.031250   
+
+                    high           low  
+Date                                    
+2001-01-03   4067.659912   3977.580078  
+2001-01-04   4180.970215   4109.549805  
+2001-01-05   4195.009766   4115.350098  
+2001-01-08   4206.720215   4101.529785  
+2001-01-09   4166.839844   4101.009766  
+...                  ...           ...  
+2020-12-23  46513.320313  45899.101563  
+2020-12-24  47053.398438  46539.019531  
+2020-12-28  47406.718750  47148.238281  
+2020-12-29  47714.550
+# --- markdown cell 40 ---
+# 7.2 Scaling the Target Variable and the Feature Dataset
+Since we are using LSTM to predict stock prices, which is a time series data, it is important to understand that LSTM can be very sensitive to the scale of the data. Right now, if the data is observed, it is present in different scales. Therefore, it is important to re-scale the data so that the range of the dataset is same, for almost all records. Here a feature range of (-1,1) is used.
+
+
+
+# --- output of cell 41 ---
+(array([[-0.93532553,  0.6322    ,  0.6648    , ..., -0.93997007,
+         -0.93861222, -0.93822641],
+        [-0.93287349,  0.6648    ,  0.9253    , ..., -0.93096396,
+         -0.93359019, -0.93233057],
+        [-0.92984511,  0.9253    , -0.9638    , ..., -0.93382579,
+         -0.93296794, -0.93207144],
+        ...,
+        [ 0.98261339, -0.9997    , -0.9998    , ...,  0.97186267,
+          0.98222136,  0.99045457],
+        [ 0.99410179, -0.9998    , -0.9998    , ...,  0.98572369,
+          0.99586481,  1.        ],
+        [ 1.        , -0.9998    , -0.9996    , ...,  1.        ,
+          1.        ,  0.99984189]]),
+ array([[-0.93288109],
+        [-0.92985305],
+        [-0.93265695],
+        ...,
+        [ 0.99387613],
+        [ 0.99977368],
+        [ 1.        ]]))
+# --- markdown cell 42 ---
+# 7.3. Dividing the dataset into Training and Test
+Normally for any other dataset train_test_split from sklearn package is used, but for time series data like stock prices which is dependent on date, the dataset is divided into train and test dataset in a different way as shown below. In timeseries data, an observation for a particular date is always dependent on the previous date records.
+
+
+# --- output of cell 43 ---
+Number of rows and columns in the Training set X: (3913, 7) and y: (3913, 1)
+Number of rows and columns in the Test set X: (977, 7) and y: (977, 1)
+
+# --- output of cell 44 ---
+Shape of Training set X: (3913, 7, 1)
+Shape of Test set X: (977, 7, 1)
+
+# --- markdown cell 45 ---
+# 8. Stock Data Modelling
+
+# --- output of cell 46 ---
+[1mModel: "sequential"[0m
+
+# --- output of cell 46 ---
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃[1m [0m[1mLayer (type)                        [0m[1m [0m┃[1m [0m[1mOutput Shape               [0m[1m [0m┃[1m [0m[1m        Param #[0m[1m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ lstm ([38;5;33mLSTM[0m)                          │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m100[0m)              │          [38;5;34m40,800[0m │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout ([38;5;33mDropout[0m)                    │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m100[0m)              │               [38;5;34m0[0m │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ lstm_1 ([38;5;33mLSTM[0m)                        │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m100[0m)              │          [38;5;34m80,400[0m │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 ([38;5;33mDropout[0m)                  │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m100[0m)              │               [38;5;34m0[0m │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ lstm_2 ([38;5;33mLSTM[0m)                        │ ([38;5;45mNone[0m, [38;5;34m100[0m)                 │          [38;5;34m80,400[0m │
+├───────────────────────
+# --- output of cell 46 ---
+[1m Total params: [0m[38;5;34m201,701[0m (787.89 KB)
+
+# --- output of cell 46 ---
+[1m Trainable params: [0m[38;5;34m201,701[0m (787.89 KB)
+
+# --- output of cell 46 ---
+[1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+
+# --- output of cell 47 ---
+Epoch 1/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m17s[0m 24ms/step - loss: 0.0713 - val_loss: 0.0255
+Epoch 2/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 22ms/step - loss: 0.0025 - val_loss: 0.0058
+Epoch 3/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 21ms/step - loss: 0.0018 - val_loss: 0.0024
+Epoch 4/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 22ms/step - loss: 0.0015 - val_loss: 1.7532e-04
+Epoch 5/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 17ms/step - loss: 0.0015 - val_loss: 4.0241e-04
+Epoch 6/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 16ms/step - loss: 0.0011 - val_loss: 7.6591e-04
+Epoch 7/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 20ms/step - loss: 0.0011 - val_loss: 4.1275e-04
+Epoch 8/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 17ms/step - loss: 9.9017e-04 - val_loss: 6.4885e-04
+Epoch 9/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 20ms/step - loss: 0.0011 - val_loss: 1.6973e-04
+Epoch 10/10
+[1m392/392[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 19ms/step - loss: 8.1462e-04 - val_loss: 3.3467e-04
+
+# --- output of cell 47 ---
+<keras.src.callbacks.history.History at 0x7af8c4210fd0>
+# --- markdown cell 48 ---
+# 8.1. Saving the Model to disk
+
+# --- output of cell 49 ---
+Model is saved to the disk
+
+# --- markdown cell 50 ---
+# 9. Model Predictions
+
+# --- output of cell 51 ---
+[1m31/31[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m1s[0m 23ms/step
+Predictions:
+
+# --- output of cell 51 ---
+array([[27123.705],
+       [27329.422],
+       [27482.66 ],
+       [27596.49 ],
+       [27523.916]], dtype=float32)
+# --- markdown cell 52 ---
+# 10. Model Evaluation
+
+# --- output of cell 53 ---
+Mean Absolute Error (MAE): 3.354003600000124
+Mean Squared Error (MSE): 13.761836335832049
+Root Mean Squared Error (RMSE): 3.7096949114222384
+R-squared (R2): 0.9956567322169512
+
+# --- markdown cell 54 ---
+# 11. Plotting the Predictions against unseen data
+
+# --- output of cell 56 ---
+<Figure size 1600x1000 with 1 Axes>
+# --- output of cell 57 ---
+Warning: 'headline_text' column not found. Skipping sentiment analysis.
+                  Close polarity subjectivity         Open         High  \
+Date                                                                      
+2001-01-02  4018.879883                        3953.219971  4028.570068   
+2001-01-03  4060.020020                        3977.580078  4067.659912   
+2001-01-04  4115.370117                        4180.970215  4180.970215   
+2001-01-05  4183.729980                        4116.339844  4195.009766   
+2001-01-08  4120.430176                        4164.759766  4206.720215   
+
+                    Low  Volume  compound  negative  neutral  positive  
+Date                                                                    
+2001-01-02  3929.370117     0.0   -0.9621     0.119    0.817     0.064  
+2001-01-03  3977.580078     0.0    0.6322     0.084    0.817     0.098  
+2001-01-04  4109.549805     0.0    0.6648     0.077    0.843     0.080  
+2001-01-05  4115.350098     0.0    0.9253     0.104    0.744     0.152  
+2001-01-08  4101.529785     0.0   -0.9638     0.119    0.855     0.026  
+

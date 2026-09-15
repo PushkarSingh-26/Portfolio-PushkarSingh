@@ -1,0 +1,152 @@
+.root {
+  container-type: inline-size;
+}
+
+.wide {
+  display: none;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  overflow: visible;
+}
+
+.narrow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-size: 0.75rem;
+}
+
+.narrow ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+  border-left: 1.5px solid var(--color-rule);
+  margin-left: 0.6rem;
+}
+
+.narrow li {
+  padding-top: 0.375rem;
+}
+
+@container (min-width: 34rem) {
+  .wide {
+    display: block;
+  }
+
+  .narrow {
+    display: none;
+  }
+}
+
+/* SVG states */
+.wide rect {
+  stroke-width: 1.5;
+  transition:
+    fill 220ms var(--ease-decode),
+    stroke 220ms var(--ease-decode);
+}
+
+.stateText {
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-size: 12.5px;
+}
+
+.edgeText {
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-size: 11px;
+}
+
+.plain rect,
+.visited rect {
+  fill: var(--color-paper);
+  stroke: var(--color-ink);
+}
+
+.plain text,
+.visited text {
+  fill: var(--color-ink);
+}
+
+.idle rect {
+  fill: var(--color-paper);
+  stroke: var(--color-ink-3);
+}
+
+.idle text {
+  fill: var(--color-ink-2);
+}
+
+.current rect {
+  fill: var(--color-caret-soft);
+  stroke: var(--color-caret);
+  stroke-width: 2;
+}
+
+.current text {
+  fill: var(--color-ink);
+  font-weight: 700;
+}
+
+.edgePlain path,
+.edgeTaken path {
+  stroke: var(--color-ink);
+  stroke-width: 1.5;
+}
+
+.edgePlain polygon,
+.edgeTaken polygon {
+  fill: var(--color-ink);
+}
+
+.edgePlain text,
+.edgeTaken text {
+  fill: var(--color-ink);
+}
+
+.edgeIdle path {
+  stroke: var(--color-ink-3);
+  stroke-width: 1.5;
+}
+
+.edgeIdle polygon {
+  fill: var(--color-ink-3);
+}
+
+.edgeIdle text {
+  fill: var(--color-ink-2);
+}
+
+/* Tree chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 4px;
+}
+
+.chip.idle {
+  border-color: var(--color-ink-3);
+  color: var(--color-ink-2);
+}
+
+.chip.current {
+  border-color: var(--color-caret);
+  background: var(--color-caret-soft);
+  font-weight: 700;
+}
+
+.rel {
+  margin-right: 0.5rem;
+  color: var(--color-ink-2);
+}
+
+.rel.edgeTaken,
+.rel.edgePlain {
+  color: var(--color-ink);
+}

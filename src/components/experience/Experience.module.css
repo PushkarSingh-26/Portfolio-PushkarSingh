@@ -1,0 +1,342 @@
+/* ---------- Timeline strip (true scale) ---------- */
+
+.strip {
+  margin-top: clamp(40px, 6vw, 64px);
+}
+
+.stripGrid {
+  display: grid;
+  gap: 6px;
+}
+
+.lane {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.laneLabel {
+  font-size: 0.8125rem;
+  color: var(--color-ink-2);
+}
+
+.laneTrack {
+  position: relative;
+  height: 18px;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.bar {
+  position: absolute;
+  top: 3px;
+  height: 12px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgb(20 35 58 / 0.12);
+  transition: box-shadow 160ms var(--ease-decode);
+}
+
+.bar[data-active] {
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+}
+
+.bar[data-ongoing]::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 3px;
+  border-left: 5px solid var(--color-ink-3);
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+
+.barLabel {
+  position: absolute;
+  left: 6px;
+  top: -1px;
+  font-size: 0.6875rem;
+  line-height: 14px;
+  color: var(--color-ink-2);
+  font-weight: 600;
+}
+
+.axis {
+  position: relative;
+  height: 18px;
+}
+
+.axis span {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--color-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Step rows ---------- */
+
+.steps {
+  list-style: none;
+  margin: clamp(32px, 5vw, 56px) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.step {
+  position: relative;
+  border-bottom: 1px solid var(--color-rule);
+  padding-left: 28px;
+}
+
+/* The spine: each node carries its area's tint, so the arc reads as a colour shift. */
+.step::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--color-rule);
+}
+
+.node {
+  position: absolute;
+  left: 0;
+  top: 27px;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+}
+
+.head {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "year chevron"
+    "line chevron"
+    "who chevron";
+  gap: 4px 16px;
+  padding: 20px 0 22px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.year {
+  grid-area: year;
+  font-size: 0.875rem;
+  color: var(--color-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.stepLine {
+  grid-area: line;
+  font-size: clamp(1.3125rem, 2.6vw, 1.875rem);
+  font-weight: 680;
+  font-stretch: 108%;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--color-ink);
+  transition: color 160ms var(--ease-decode);
+}
+
+.head:hover .stepLine {
+  color: var(--color-caret);
+}
+
+.who {
+  grid-area: who;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  font-size: 0.9375rem;
+}
+
+.chevron {
+  grid-area: chevron;
+  align-self: center;
+  width: 12px;
+  height: 12px;
+  border-right: 1.75px solid var(--color-ink);
+  border-bottom: 1.75px solid var(--color-ink);
+  transform: rotate(45deg) translate(-3px, -3px);
+  transition: transform 220ms var(--ease-decode);
+}
+
+.step[data-open] .chevron {
+  transform: rotate(-135deg) translate(-3px, -3px);
+}
+
+.panel {
+  padding-bottom: 32px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel:not([hidden]) {
+    animation: panelIn 260ms var(--ease-decode);
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.detail {
+  display: grid;
+  gap: 28px;
+}
+
+.detailMain {
+  max-width: 64ch;
+}
+
+.roles {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.roles li {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  border: 1px solid var(--color-rule);
+  border-radius: 6px;
+}
+
+/* The promotion is a real sequence: first role leads into the second. */
+.roles li + li {
+  position: relative;
+  border-color: var(--color-ink);
+}
+
+.roles li + li::before {
+  content: "";
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  width: 14px;
+  height: 1.5px;
+  background: var(--color-ink);
+}
+
+.points {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.points p {
+  color: var(--color-ink);
+}
+
+.capBtn {
+  cursor: pointer;
+  color: var(--color-ink);
+  min-height: 32px;
+  align-items: center;
+}
+
+.capBtn:hover {
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+}
+
+/* ---------- Codec RAG flow ---------- */
+
+.rag {
+  margin-top: 24px;
+}
+
+.ragNodes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px 22px;
+}
+
+.ragNodes li {
+  position: relative;
+  padding: 8px 12px;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--color-paper);
+}
+
+.ragNodes li:first-child {
+  background: var(--color-paper-2);
+}
+
+.ragNodes li:last-child {
+  background: var(--color-tint-genai);
+}
+
+.ragNodes li + li::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  width: 20px;
+  height: 1.5px;
+  background: var(--color-ink);
+}
+
+/* Flow: a pulse travels each edge once when the panel opens. */
+.ragNodes[data-animate] li + li::after {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: calc(50% - 2.5px);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-caret);
+  opacity: 0;
+  animation: pulse 520ms var(--ease-decode) calc(var(--i) * 360ms) 1 forwards;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .detail {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: 48px;
+  }
+  .head {
+    grid-template-columns: 72px minmax(0, 1fr) minmax(0, 0.9fr) auto;
+    grid-template-areas: "year line who chevron";
+    align-items: baseline;
+  }
+  .year {
+    font-size: 1rem;
+  }
+  .step {
+    padding-left: 36px;
+  }
+  .node {
+    top: 29px;
+  }
+}

@@ -1,0 +1,650 @@
+/*
+  Agent × layer matrix. Colours come from ./tokens.ts (researchVars).
+  Geometry: every layer row is --row-h tall at its top; nodes sit centred in that
+  band, so a column's path runs through all five node centres.
+*/
+
+.root {
+  container-type: inline-size;
+  --gap: 6px;
+  --row-h: 44px;
+  --sq: 18px;
+}
+
+.compact {
+  --head-w: clamp(9rem, 36%, 15rem);
+}
+
+.expanded {
+  --head-w: clamp(12rem, 24%, 17rem);
+}
+
+.hint {
+  margin-bottom: 1rem;
+  max-width: 60ch;
+}
+
+/* ---------- Wide vs narrow ---------- */
+
+.wide {
+  display: none;
+}
+
+.narrow {
+  display: block;
+}
+
+@container (min-width: 34rem) {
+  .compact .wide {
+    display: block;
+  }
+  .compact .narrow {
+    display: none;
+  }
+}
+
+@container (min-width: 52rem) {
+  .expanded .wide {
+    display: block;
+  }
+  .expanded .narrow {
+    display: none;
+  }
+}
+
+/* ---------- Grid ---------- */
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--head-w) repeat(4, minmax(0, 1fr));
+  column-gap: var(--gap);
+}
+
+.expanded .grid {
+  column-gap: 0;
+}
+
+.row {
+  position: relative;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: start;
+}
+
+.headRow {
+  align-items: end;
+  padding-bottom: 0.5rem;
+}
+
+.corner {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.expanded .corner {
+  padding-bottom: 0.7rem;
+}
+
+.rowHead {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+/* ---------- Column headers (agents) ---------- */
+
+.headBtn {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.35rem 0.3rem 0.7rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--r-ink-2);
+  text-align: center;
+  text-wrap: balance;
+  cursor: pointer;
+  transition: color 120ms var(--r-ease);
+}
+
+.expanded .headBtn {
+  padding-left: 14px;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.headBtn:hover,
+.headBtn[aria-pressed="true"] {
+  color: var(--r-ink);
+}
+
+/* Current column: a caret tick on the column's axis (compact) or under the header (expanded). */
+.headBtn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 9px);
+  width: 18px;
+  height: 2px;
+  background: var(--r-caret);
+  transform: scaleX(0);
+  transition: transform 220ms var(--r-ease);
+}
+
+.expanded .headBtn::after {
+  left: 0;
+  right: 0;
+  width: auto;
+  transform-origin: left center;
+}
+
+.headBtn[aria-pressed="true"]::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Row headers (layers) ---------- */
+
+.rowBtn {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  min-height: var(--row-h);
+  /* First line's centre sits on the node centre (22px). */
+  padding: 13px 0.75rem 13px 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--r-ink-2);
+  text-align: left;
+  cursor: pointer;
+  transition: color 120ms var(--r-ease);
+}
+
+.rowBtn:hover,
+.rowBtn[aria-pressed="true"] {
+  color: var(--r-ink);
+}
+
+.rowBtn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: var(--r-caret);
+  transform: scaleY(0);
+  transition: transform 220ms var(--r-ease);
+}
+
+.rowBtn[aria-pressed="true"]::before {
+  transform: scaleY(1);
+}
+
+/* ---------- Cells ---------- */
+
+.cell {
+  position: relative;
+  min-width: 0;
+}
+
+.compact .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--row-h);
+  cursor: pointer;
+}
+
+.sq {
+  position: relative;
+  z-index: 1;
+  width: var(--sq);
+  height: var(--sq);
+  border-radius: 4px;
+  border: 1.5px solid var(--r-ink-3);
+  background: var(--r-paper);
+  transition:
+    background-color 120ms var(--r-ease),
+    border-color 120ms var(--r-ease);
+}
+
+.cell[data-on] .sq {
+  background: var(--r-tint-genai);
+  border-color: var(--r-line-genai);
+}
+
+.expanded .row {
+  border-top: 1px solid var(--r-rule);
+}
+
+.expanded .headRow {
+  border-top: 0;
+}
+
+.expanded .rowHead {
+  padding: 14px 24px 20px 0;
+}
+
+.expanded .cell {
+  padding: 14px 18px 20px 14px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--r-ink-2);
+  text-wrap: pretty;
+  transition: color 120ms var(--r-ease);
+}
+
+.expanded .cell[data-on] {
+  color: var(--r-ink);
+}
+
+.layerName {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.layerQuote {
+  margin-top: 0.35rem;
+  text-wrap: pretty;
+}
+
+.humanTag {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.humanTag a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--r-caret) 45%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.humanTag a:hover {
+  color: var(--r-caret);
+}
+
+/* ---------- Paths (one per agent column) ---------- */
+
+.track {
+  position: absolute;
+  grid-row: 2 / 6;
+  /* From the first node centre to the last (the action row's node, 22px into row 6). */
+  top: calc(var(--row-h) / 2);
+  bottom: calc(var(--row-h) / -2);
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+/* Explicit end lines: for absolutely positioned grid children, "auto" means the container edge. */
+.track[data-col="0"] {
+  grid-column: 2 / 3;
+}
+.track[data-col="1"] {
+  grid-column: 3 / 4;
+}
+.track[data-col="2"] {
+  grid-column: 4 / 5;
+}
+.track[data-col="3"] {
+  grid-column: 5 / 6;
+}
+
+.track::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 0.75px);
+  width: 1.5px;
+  background: var(--r-rule);
+  transition: background-color 120ms var(--r-ease);
+}
+
+.track[data-on]::before {
+  background: var(--r-line-genai);
+}
+
+.expanded .track {
+  grid-row: 2 / 7;
+  top: 0;
+  bottom: 0;
+}
+
+.expanded .track::before {
+  left: 0;
+}
+
+.expanded .track[data-on]::before {
+  width: 2px;
+}
+
+.pulse {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.pulse::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--r-caret);
+}
+
+.expanded .pulse::before {
+  top: 0;
+  left: -3px;
+}
+
+/* ---------- The shared backbone and the human checkpoint ---------- */
+
+.backbone {
+  position: absolute;
+  grid-column: 2 / -1;
+  grid-row: 1;
+  top: calc(var(--row-h) / 2 - 0.75px);
+  left: calc((100% - 3 * var(--gap)) / 8);
+  right: calc((100% - 3 * var(--gap)) / 8);
+  height: 1.5px;
+  background: var(--r-ink);
+  pointer-events: none;
+}
+
+.expanded .backbone {
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+.swatch {
+  display: inline-block;
+  flex: none;
+  width: 1.1rem;
+  height: 1.5px;
+  background: var(--r-ink);
+}
+
+.backboneBtn,
+.humanBtn {
+  grid-row: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: var(--r-ink-2);
+  cursor: pointer;
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+  transition:
+    color 120ms var(--r-ease),
+    text-decoration-color 120ms var(--r-ease);
+}
+
+.backboneBtn {
+  grid-column: 1;
+  justify-self: start;
+  padding: 0 0.75rem;
+}
+
+/* Sits on the sales path, just below its orchestration node: a checkpoint on the way to action. */
+.humanBtn {
+  grid-column: 3;
+  justify-self: center;
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  text-align: center;
+}
+
+.humanBtn span {
+  background: var(--r-paper);
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.backboneBtn:hover,
+.humanBtn:hover,
+.backboneBtn[aria-pressed="true"],
+.humanBtn[aria-pressed="true"] {
+  color: var(--r-ink);
+}
+
+.backboneBtn[aria-pressed="true"],
+.humanBtn[aria-pressed="true"] {
+  text-decoration-color: var(--r-caret);
+}
+
+.backboneNote {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* ---------- Readout panel (compact) ---------- */
+
+.panel {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--r-rule);
+}
+
+.readTitle {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.readQuote {
+  margin-top: 0.6rem;
+}
+
+.readList {
+  margin-top: 0.75rem;
+  display: grid;
+  row-gap: 0.55rem;
+}
+
+.readItem {
+  display: grid;
+  grid-template-columns: var(--head-w) minmax(0, 1fr);
+  column-gap: var(--gap);
+}
+
+.readItem dt {
+  padding-left: 0.75rem;
+}
+
+.readItem dd {
+  text-wrap: pretty;
+}
+
+.inlineTag {
+  margin-left: 0.4em;
+  font-size: 0.8125rem;
+}
+
+.readCite {
+  margin-top: 0.75rem;
+}
+
+.tableCite {
+  margin-top: 1rem;
+}
+
+/* ---------- Narrow: tabs + stepper ---------- */
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.tab {
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--r-rule);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 560;
+  line-height: 1.25;
+  color: var(--r-ink-2);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 120ms var(--r-ease),
+    color 120ms var(--r-ease);
+}
+
+.tab:hover {
+  color: var(--r-ink);
+}
+
+.tab[aria-selected="true"] {
+  border-color: var(--r-ink);
+  color: var(--r-ink);
+}
+
+.tabpanel {
+  margin-top: 1.25rem;
+}
+
+.path {
+  display: grid;
+}
+
+.pstep {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  column-gap: 10px;
+  padding-bottom: 0.9rem;
+}
+
+/* The agent's path: node centre to next node centre. */
+.pstep::before {
+  content: "";
+  position: absolute;
+  left: calc(14px - 0.75px);
+  top: calc(var(--row-h) / 2);
+  bottom: calc(var(--row-h) / -2);
+  width: 1.5px;
+  background: var(--r-line-genai);
+}
+
+.pstep:last-child::before {
+  display: none;
+}
+
+.pnode {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  justify-self: center;
+  margin-top: calc((var(--row-h) - var(--sq)) / 2);
+  width: var(--sq);
+  height: var(--sq);
+  border-radius: 4px;
+  border: 1.5px solid var(--r-line-genai);
+  background: var(--r-tint-genai);
+}
+
+.flash {
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 4px;
+  background: var(--r-caret);
+  opacity: 0;
+  animation: flash 320ms var(--r-ease) both;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.pbody {
+  min-width: 0;
+}
+
+.disclosure {
+  min-width: 0;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--row-h);
+  font-size: 0.875rem;
+  font-weight: 560;
+  line-height: 1.25;
+  color: var(--r-ink-2);
+  cursor: pointer;
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::after {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-left: 0.15rem;
+  border-right: 1.5px solid var(--r-ink-3);
+  border-bottom: 1.5px solid var(--r-ink-3);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 220ms var(--r-ease);
+}
+
+.disclosure[open] > .summary {
+  color: var(--r-ink);
+}
+
+.disclosure[open] > .summary::after {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.disclosureQuote {
+  margin-bottom: 0.75rem;
+}
+
+.extras {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.25rem;
+}
+
+.extras > .disclosure[open] {
+  flex-basis: 100%;
+}

@@ -1,0 +1,336 @@
+/*
+  Attention map. Two layouts share one state:
+  - desktop (fine pointer + hover, >= 1024px): rows, work column, SVG attention lines
+  - everything else: area-grouped chips with the readout inline under the chosen group
+  The switch is pure CSS so server HTML never flashes the wrong layout.
+*/
+
+.desktopOnly {
+  display: none;
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .desktopOnly {
+    display: block;
+  }
+  .mobileOnly {
+    display: none;
+  }
+}
+
+/* ---------- Mode switch (radiogroup) ---------- */
+
+.seg {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 6px;
+  background: var(--color-paper-2);
+}
+
+.segBtn {
+  min-height: 38px;
+  padding-inline: 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 560;
+  line-height: 1;
+  color: var(--color-ink-2);
+  cursor: pointer;
+  transition:
+    background-color 120ms var(--ease-decode),
+    border-color 120ms var(--ease-decode),
+    color 120ms var(--ease-decode);
+}
+
+.segBtn:hover {
+  color: var(--color-ink);
+}
+
+.segBtn[aria-checked="true"] {
+  background: var(--color-paper);
+  border-color: var(--color-rule);
+  color: var(--color-ink);
+}
+
+/* ---------- Group headers ---------- */
+
+.group + .group {
+  margin-top: 10px;
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding-left: 4px;
+  font-size: 14px;
+  font-weight: 640;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.toolHead {
+  padding-left: 0;
+}
+
+/* A tiny empty token: the area's tint, token radius. */
+.swatch {
+  flex: none;
+  width: 18px;
+  height: 12px;
+  border-radius: 4px;
+}
+
+/* ---------- Pinned marker: a text caret sitting before the label ---------- */
+
+.row[aria-pressed="true"]::before,
+.work[aria-pressed="true"]::before,
+.chip[aria-pressed="true"]::before,
+.mChip[aria-pressed="true"]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 1.1em;
+  border-radius: 1px;
+  background: var(--color-caret);
+  transform: translateY(-50%);
+}
+
+/* ---------- Desktop: capability rows ---------- */
+
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 34px;
+  padding: 5px 12px 5px 30px;
+  /* Transparent 1px edges keep neighbouring lit rows reading as separate tokens. */
+  border-block: 1px solid transparent;
+  background-clip: padding-box;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 460;
+  line-height: 1.3;
+  color: var(--color-ink-2);
+  cursor: pointer;
+  transition:
+    background-color 120ms var(--ease-decode),
+    color 120ms var(--ease-decode);
+}
+
+.row[data-lit] {
+  background: var(--tint);
+  color: var(--color-ink);
+}
+
+.row[aria-pressed="true"] {
+  color: var(--color-ink);
+}
+
+.row[aria-pressed="true"]::before {
+  left: 24px;
+}
+
+/* ---------- Desktop: tool chips ---------- */
+
+.chipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  padding: 4px 9px;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.25;
+  color: var(--color-ink-2);
+  cursor: pointer;
+  transition:
+    background-color 120ms var(--ease-decode),
+    color 120ms var(--ease-decode);
+}
+
+.chip[data-linked] {
+  color: var(--color-ink);
+}
+
+.chip[data-lit] {
+  background: var(--tint);
+  color: var(--color-ink);
+}
+
+.chip[aria-pressed="true"]::before {
+  left: 3px;
+}
+
+/* Linked tools carry a dot on the side their lines leave from. */
+.dot {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-ink);
+}
+
+.legendDot {
+  display: inline-block;
+  vertical-align: 0.12em;
+}
+
+/* ---------- Desktop: work rows ---------- */
+
+.work {
+  position: relative;
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "title kind"
+    "meta when";
+  column-gap: 16px;
+  row-gap: 2px;
+  align-items: baseline;
+  padding: 8px 12px 9px 16px;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 120ms var(--ease-decode);
+}
+
+.work[data-lit] {
+  background: var(--tint);
+}
+
+.work[aria-pressed="true"]::before {
+  left: 7px;
+  top: 19px;
+}
+
+.workTitle {
+  grid-area: title;
+  font-size: 16px;
+  font-weight: 640;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+.workMeta {
+  grid-area: meta;
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: var(--color-ink-2);
+}
+
+.workKind {
+  grid-area: kind;
+  justify-self: end;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--color-ink-2);
+}
+
+.workWhen {
+  grid-area: when;
+  justify-self: end;
+  font-size: 13.5px;
+  line-height: 1.35;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-2);
+}
+
+/* Narrow desktop: the work column is ~380px, so dates move under the context line
+   instead of squeezing it into a two-line wrap. */
+@media (max-width: 1199px) {
+  .work {
+    grid-template-areas:
+      "title kind"
+      "meta meta"
+      "when when";
+  }
+  .workWhen {
+    justify-self: start;
+  }
+}
+
+/* ---------- Mobile / touch ---------- */
+
+.mGroup + .mGroup {
+  margin-top: 28px;
+}
+
+.mChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 6px;
+  margin-top: 8px;
+}
+
+.mChip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.25;
+  color: var(--color-ink);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms var(--ease-decode);
+}
+
+/* Extend the hit area to 44px without making the token look like a slab. */
+.mChip::after {
+  content: "";
+  position: absolute;
+  inset: -4px -3px;
+}
+
+.mChip[data-muted] {
+  color: var(--color-ink-2);
+}
+
+.mChip[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+  color: var(--color-ink);
+}
+
+.mChip[data-tool][aria-pressed="true"] {
+  background: var(--color-caret-soft);
+}
+
+.mChip[aria-pressed="true"]::before {
+  left: 5px;
+}
+
+.mPanel {
+  margin-top: 14px;
+  padding: 16px 16px 18px;
+  border-radius: 8px;
+  background: var(--color-paper-2);
+}
+
+.mItem + .mItem {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-rule);
+}

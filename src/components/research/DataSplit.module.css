@@ -1,0 +1,68 @@
+.figure {
+  max-width: 44rem;
+}
+
+.bar {
+  display: flex;
+  gap: 2px;
+  height: 14px;
+}
+
+.bar > span {
+  flex-basis: 0;
+}
+
+.bar > span:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.bar > span:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.train {
+  background: var(--r-line-ml);
+}
+
+.test {
+  background: var(--r-ink-3);
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+
+.label dt {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.labelEnd {
+  text-align: right;
+}
+
+.labelEnd dt {
+  justify-content: flex-end;
+}
+
+.swatch {
+  flex: none;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+
+.source {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  padding: 0.85rem 1rem;
+  border-radius: 6px;
+  background: var(--r-paper-2);
+  color: var(--r-ink);
+  line-height: 1.7;
+  white-space: pre;
+}

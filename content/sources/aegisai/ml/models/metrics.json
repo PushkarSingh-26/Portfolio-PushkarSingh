@@ -1,0 +1,224 @@
+{
+  "algorithm": "xgboost",
+  "version": "v6",
+  "model_version": "risk-xgboost-v6",
+  "trained_at": "2026-06-20T13:59:02.038995+00:00",
+  "n_samples": 1291,
+  "feature_columns": [
+    "cvss_score",
+    "severity_ordinal",
+    "published_age_days",
+    "description_length",
+    "max_confidence",
+    "avg_confidence",
+    "num_mappings",
+    "num_high_confidence",
+    "distinct_tactics",
+    "technique_popularity",
+    "is_critical",
+    "is_high_confidence",
+    "correlation_density",
+    "epss_score",
+    "epss_percentile",
+    "kev_present",
+    "kev_age_days",
+    "misp_actor_linked",
+    "misp_actor_count",
+    "misp_max_actor_conf",
+    "wazuh_observed",
+    "wazuh_alert_count",
+    "wazuh_max_level",
+    "cve_pagerank",
+    "cve_degree",
+    "ta_pagerank",
+    "ta_degree",
+    "technique_degree",
+    "community_risk",
+    "connected_entities",
+    "related_alerts",
+    "related_campaigns",
+    "related_malware",
+    "shortest_path_to_alert",
+    "node_embedding_norm",
+    "predicted_link_count",
+    "predicted_actor_exposure",
+    "community_influence",
+    "graph_similarity"
+  ],
+  "metrics": {
+    "r2": 0.9792,
+    "mae": 0.4339,
+    "rmse": 1.4227
+  },
+  "feature_importances": [
+    {
+      "feature": "cve_degree",
+      "importance": 0.6953
+    },
+    {
+      "feature": "wazuh_observed",
+      "importance": 0.0733
+    },
+    {
+      "feature": "misp_actor_linked",
+      "importance": 0.0683
+    },
+    {
+      "feature": "graph_similarity",
+      "importance": 0.0656
+    },
+    {
+      "feature": "kev_present",
+      "importance": 0.0189
+    },
+    {
+      "feature": "kev_age_days",
+      "importance": 0.0171
+    },
+    {
+      "feature": "wazuh_max_level",
+      "importance": 0.0108
+    },
+    {
+      "feature": "wazuh_alert_count",
+      "importance": 0.0094
+    },
+    {
+      "feature": "cvss_score",
+      "importance": 0.006
+    },
+    {
+      "feature": "ta_pagerank",
+      "importance": 0.0058
+    },
+    {
+      "feature": "epss_score",
+      "importance": 0.005
+    },
+    {
+      "feature": "severity_ordinal",
+      "importance": 0.0038
+    },
+    {
+      "feature": "cve_pagerank",
+      "importance": 0.003
+    },
+    {
+      "feature": "technique_degree",
+      "importance": 0.0023
+    },
+    {
+      "feature": "epss_percentile",
+      "importance": 0.0023
+    },
+    {
+      "feature": "community_influence",
+      "importance": 0.0021
+    },
+    {
+      "feature": "technique_popularity",
+      "importance": 0.0017
+    },
+    {
+      "feature": "misp_actor_count",
+      "importance": 0.0016
+    },
+    {
+      "feature": "avg_confidence",
+      "importance": 0.0016
+    },
+    {
+      "feature": "max_confidence",
+      "importance": 0.0015
+    },
+    {
+      "feature": "num_mappings",
+      "importance": 0.0012
+    },
+    {
+      "feature": "correlation_density",
+      "importance": 0.0011
+    },
+    {
+      "feature": "is_critical",
+      "importance": 0.0007
+    },
+    {
+      "feature": "community_risk",
+      "importance": 0.0006
+    },
+    {
+      "feature": "connected_entities",
+      "importance": 0.0003
+    },
+    {
+      "feature": "ta_degree",
+      "importance": 0.0002
+    },
+    {
+      "feature": "shortest_path_to_alert",
+      "importance": 0.0002
+    },
+    {
+      "feature": "distinct_tactics",
+      "importance": 0.0002
+    },
+    {
+      "feature": "predicted_link_count",
+      "importance": 0.0001
+    },
+    {
+      "feature": "related_alerts",
+      "importance": 0.0001
+    },
+    {
+      "feature": "published_age_days",
+      "importance": 0.0001
+    },
+    {
+      "feature": "misp_max_actor_conf",
+      "importance": 0.0001
+    },
+    {
+      "feature": "description_length",
+      "importance": 0.0
+    },
+    {
+      "feature": "node_embedding_norm",
+      "importance": 0.0
+    },
+    {
+      "feature": "related_malware",
+      "importance": 0.0
+    },
+    {
+      "feature": "num_high_confidence",
+      "importance": 0.0
+    },
+    {
+      "feature": "is_high_confidence",
+      "importance": 0.0
+    },
+    {
+      "feature": "related_campaigns",
+      "importance": 0.0
+    },
+    {
+      "feature": "predicted_actor_exposure",
+      "importance": 0.0
+    }
+  ],
+  "score_distribution": {
+    "0-20": 0,
+    "20-40": 91,
+    "40-60": 769,
+    "60-80": 420,
+    "80-100": 11
+  },
+  "level_distribution": {
+    "CRITICAL": 31,
+    "HIGH": 875,
+    "MEDIUM": 384,
+    "LOW": 1
+  }
+}

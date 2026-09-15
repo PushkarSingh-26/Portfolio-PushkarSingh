@@ -1,0 +1,26 @@
+Transcriptions of figure and table images that PDF text extraction cannot read.
+Transcribed by hand from the original PDFs; each block names its figure.
+
+--- AI agents paper, Table 4: Quantitative Evaluation Table ---
+Domain | Manual Process Time (Avg.) | Automated Process Time (Avg.) | Time Reduction
+HR Recruitment | 25–30 min per candidate | 7–9 min | 70–75%
+Sales Research | 20 min per lead | 5–7 min | 65–75%
+Data Analysis | 15 min per query | 3–5 min | 65–80%
+Sentiment Analysis | 12 min per dataset | 3 min | 75%
+
+--- Sentiment paper, Figure 2 (code screenshot) ---
+stock_price = pd.read_csv('/content/drive/MyDrive/^BSESN.csv')
+stock_headlines = pd.read_csv('/content/drive/MyDrive/final-india-news-headlines.csv')
+
+--- Sentiment paper, Figure 3 (code screenshot output) ---
+Number of rows and columns in the Training set X: (1964, 7) and y: (1964, 1)
+Number of rows and columns in the Test set X: (490, 7) and y: (490, 1)
+
+--- Sentiment paper, Table 2: Range and significance of Sentiment score ---
+VADER | Positive | [0-1] | The proportion of textual data that fall in the positive category
+VADER | Negative | [0-1] | The proportion of textual data that fall in the Negative category
+VADER | Neutral | [0-1] | The proportion of textual data that fall in the Neutral category
+VADER | Compound | [-1,1] | Calculates the sum of all lexicon ratings which have been normalized between [-1,1]
+
+--- Sentiment paper, Figure 4: Sentiment analysis result (one row) ---
+2001-01-05 | Close 4183.729980 | headline_text: Light combat craft takes India into club class... | compound 0.9253 | negative 0.104 | neutral 0.744 | positive 0.152

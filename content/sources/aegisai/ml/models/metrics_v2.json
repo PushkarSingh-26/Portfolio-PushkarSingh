@@ -1,0 +1,114 @@
+{
+  "algorithm": "xgboost",
+  "version": "v2",
+  "model_version": "risk-xgboost-v2",
+  "trained_at": "2026-06-16T06:19:44.810977+00:00",
+  "n_samples": 1291,
+  "feature_columns": [
+    "cvss_score",
+    "severity_ordinal",
+    "published_age_days",
+    "description_length",
+    "max_confidence",
+    "avg_confidence",
+    "num_mappings",
+    "num_high_confidence",
+    "distinct_tactics",
+    "technique_popularity",
+    "is_critical",
+    "is_high_confidence",
+    "correlation_density",
+    "epss_score",
+    "epss_percentile",
+    "kev_present",
+    "kev_age_days"
+  ],
+  "metrics": {
+    "r2": 0.9964,
+    "mae": 0.2306,
+    "rmse": 0.4366
+  },
+  "feature_importances": [
+    {
+      "feature": "kev_age_days",
+      "importance": 0.5406
+    },
+    {
+      "feature": "kev_present",
+      "importance": 0.2615
+    },
+    {
+      "feature": "severity_ordinal",
+      "importance": 0.1078
+    },
+    {
+      "feature": "cvss_score",
+      "importance": 0.0489
+    },
+    {
+      "feature": "technique_popularity",
+      "importance": 0.0196
+    },
+    {
+      "feature": "max_confidence",
+      "importance": 0.0067
+    },
+    {
+      "feature": "epss_score",
+      "importance": 0.0066
+    },
+    {
+      "feature": "num_mappings",
+      "importance": 0.0021
+    },
+    {
+      "feature": "epss_percentile",
+      "importance": 0.0018
+    },
+    {
+      "feature": "is_high_confidence",
+      "importance": 0.0011
+    },
+    {
+      "feature": "avg_confidence",
+      "importance": 0.001
+    },
+    {
+      "feature": "num_high_confidence",
+      "importance": 0.0009
+    },
+    {
+      "feature": "distinct_tactics",
+      "importance": 0.0009
+    },
+    {
+      "feature": "correlation_density",
+      "importance": 0.0003
+    },
+    {
+      "feature": "description_length",
+      "importance": 0.0001
+    },
+    {
+      "feature": "published_age_days",
+      "importance": 0.0001
+    },
+    {
+      "feature": "is_critical",
+      "importance": 0.0
+    }
+  ],
+  "score_distribution": {
+    "0-20": 1,
+    "20-40": 717,
+    "40-60": 564,
+    "60-80": 1,
+    "80-100": 8
+  },
+  "level_distribution": {
+    "CRITICAL": 8,
+    "HIGH": 62,
+    "MEDIUM": 1191,
+    "LOW": 30
+  }
+}

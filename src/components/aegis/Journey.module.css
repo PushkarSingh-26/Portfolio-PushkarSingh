@@ -1,0 +1,794 @@
+/*
+  AegisAI investigation journey — a typeset case file.
+  Rail across the top, the case file (left) accumulates one artifact per stage,
+  the stage panel (right) stays in view. Below 1024px it becomes a stepper.
+*/
+
+.journey {
+  position: relative;
+  outline: none;
+}
+
+/* ---------- Setting row + rail ---------- */
+
+.railBlock {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.lane {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.125rem;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.settingKey {
+  color: var(--color-ink);
+  margin-right: 0.375rem;
+  white-space: nowrap;
+}
+
+.opt {
+  position: relative;
+  display: inline-flex;
+}
+
+.opt input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.optFace {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.6rem;
+  border-radius: 4px;
+  border: 1.5px solid transparent;
+  color: var(--color-ink-2);
+  transition:
+    border-color 120ms var(--ease-decode),
+    color 120ms var(--ease-decode);
+}
+
+.opt input:hover + .optFace {
+  color: var(--color-ink);
+}
+
+.opt input:checked + .optFace {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+  background: var(--color-paper-2);
+}
+
+.opt input:checked + .optFaceLlm {
+  background: var(--color-tint-llm);
+  border-color: var(--color-line-llm);
+}
+
+.opt input:focus-visible + .optFace {
+  outline: 2px solid var(--color-caret);
+  outline-offset: 2px;
+}
+
+.laneLine,
+.laneRiser {
+  display: none;
+}
+
+.railCaption {
+  margin-top: 0.75rem;
+  color: var(--color-ink-2);
+  max-width: 64ch;
+}
+
+/* Rail: compact scrollable strip below 1024px */
+.railScroll {
+  margin-top: 0.75rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  padding-block: 4px;
+}
+
+.rail {
+  position: relative;
+  display: flex;
+  gap: 0.375rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 2px;
+  width: max-content;
+}
+
+.track,
+.pulseLane {
+  display: none;
+}
+
+.stop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 0.75rem;
+  border: 1.5px solid var(--color-rule);
+  border-radius: 6px;
+  background: var(--color-paper);
+  color: var(--color-ink-2);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color 120ms var(--ease-decode),
+    color 120ms var(--ease-decode);
+}
+
+.stop:hover {
+  color: var(--color-ink);
+}
+
+.dot {
+  position: relative;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-ink-3);
+  background: var(--color-paper);
+}
+
+.stopNo {
+  font-variant-numeric: tabular-nums;
+}
+
+.stopName {
+  font-weight: 560;
+}
+
+.stopVisited {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.stopVisited .dot {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.stopCurrent {
+  color: var(--color-caret);
+  border-color: var(--color-caret);
+}
+
+.stopCurrent .dot {
+  background: var(--color-caret);
+  border-color: var(--color-caret);
+}
+
+.stopLlm .dot::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-line-llm);
+}
+
+@media (min-width: 64rem) {
+  .railBlock {
+    margin-bottom: 1.75rem;
+  }
+
+  .lane {
+    width: calc(100% * 5.5 / 9);
+    height: 44px;
+    flex-wrap: nowrap;
+  }
+
+  .laneLine {
+    display: block;
+    flex: 1;
+    min-width: 1rem;
+    border-top: 1.5px dashed var(--color-ink-3);
+  }
+
+  /* Runs from the lane down into stop 6 — the only stage the LLM touches. */
+  .laneRiser {
+    display: block;
+    position: absolute;
+    left: calc(100% * 5.5 / 9 - 0.75px);
+    top: 22px;
+    height: 42px;
+    border-left: 1.5px dashed var(--color-ink-3);
+  }
+
+  .laneOn .laneLine,
+  .laneOn .laneRiser {
+    border-style: solid;
+    border-color: var(--color-line-llm);
+  }
+
+  .railScroll {
+    margin-top: 20px;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .rail {
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 0;
+    width: auto;
+    padding: 0;
+  }
+
+  .track {
+    display: block;
+    position: absolute;
+    top: 5.25px;
+    left: calc(100% / 18);
+    right: calc(100% / 18);
+    height: 1.5px;
+    background: var(--color-ink-3);
+    pointer-events: none;
+  }
+
+  .trackDone {
+    position: absolute;
+    inset: 0;
+    background: var(--color-ink);
+    transform-origin: left center;
+    transition: transform 480ms var(--ease-decode);
+  }
+
+  /* Clip box around the track (6px margin) so the moving wrapper never adds scroll width. */
+  .pulseLane {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: calc(100% / 18 - 6px);
+    right: calc(100% / 18 - 6px);
+    height: 12px;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .pulseTrack {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    height: 0;
+  }
+
+  .pulseWrap {
+    position: absolute;
+    inset: 0;
+  }
+
+  .pulse {
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-caret);
+  }
+
+  .stop {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 64px;
+    padding: 0 0.25rem 0.25rem;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    white-space: normal;
+    text-align: center;
+    font-size: 0.8125rem;
+    line-height: 1.25;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    z-index: 1;
+  }
+
+  .stopCurrent .dot::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-caret);
+  }
+
+  .stopLlm .dot::after {
+    inset: -8px;
+  }
+
+  .stopLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-stretch: 92%;
+  }
+
+  .stopCurrent .stopName {
+    font-weight: 680;
+  }
+}
+
+/* ---------- Body: case file + stage panel ---------- */
+
+.body {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.aside {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .body {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 2.5rem;
+    align-items: start;
+  }
+
+  .caseFile {
+    grid-column: 1 / span 7;
+  }
+
+  .aside {
+    display: block;
+    grid-column: 8 / span 5;
+    position: sticky;
+    top: calc(var(--nav-h) + 24px);
+  }
+
+  .mobileOnly {
+    display: none;
+  }
+}
+
+.caseFile {
+  min-width: 0;
+  border: 1px solid var(--color-rule);
+  border-radius: 8px;
+  padding: 0 1rem;
+  background: var(--color-paper);
+}
+
+@media (min-width: 40rem) {
+  .caseFile {
+    padding: 0 1.5rem;
+  }
+}
+
+.caseHead {
+  padding: 1.125rem 0 1rem;
+}
+
+.caseTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  font-weight: 650;
+  font-stretch: 104%;
+}
+
+.caseLabel {
+  margin-top: 0.25rem;
+  color: var(--color-ink-2);
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  scroll-margin-top: calc(var(--nav-h) + 16px);
+  border-top: 1px solid var(--color-rule);
+}
+
+.itemHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.itemButton {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0.625rem 0;
+  text-align: left;
+  background: none;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.itemButton:hover .itemName {
+  color: var(--color-caret);
+}
+
+.itemCurrentHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.875rem 0 0.5rem;
+}
+
+.itemNo {
+  flex: none;
+  width: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-2);
+  font-size: 0.875rem;
+}
+
+.itemCurrentHead .itemNo {
+  color: var(--color-caret);
+  font-weight: 650;
+}
+
+.itemName {
+  flex: none;
+  font-weight: 600;
+  transition: color 120ms var(--ease-decode);
+}
+
+.itemCurrentHead .itemName {
+  font-weight: 680;
+  font-stretch: 104%;
+}
+
+.itemSummary {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-ink-2);
+}
+
+.itemRefs {
+  flex: none;
+  display: flex;
+  gap: 0.125rem;
+  padding-right: 0.125rem;
+}
+
+.itemBody {
+  padding: 0.25rem 0 1.5rem;
+}
+
+.mobilePanel {
+  padding: 0.25rem 0 1.25rem;
+}
+
+/* Every artifact is a size container so its insides can adapt to the column. */
+.artifact {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+@media (min-width: 40rem) {
+  .itemBody {
+    padding-left: 2rem;
+  }
+}
+
+/* ---------- Evidence markers ---------- */
+
+.ref {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-size: 0.6875rem;
+  line-height: 1;
+  vertical-align: super;
+  color: var(--color-caret);
+  text-decoration: none;
+  padding: 0.1em 0.12em;
+  margin-left: 0.08em;
+  border-radius: 4px;
+  transition:
+    background-color 120ms var(--ease-decode),
+    color 120ms var(--ease-decode);
+}
+
+.ref::after {
+  content: "";
+  position: absolute;
+  inset: -12px -3px;
+}
+
+.ref:hover,
+.ref[data-lit] {
+  background: var(--color-caret-soft);
+  color: var(--color-ink);
+}
+
+.refStatic {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-ink-2);
+}
+
+/* ---------- Stage panel ---------- */
+
+.panelCount {
+  color: var(--color-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.panelTitle {
+  margin-top: 0.375rem;
+}
+
+.panelBody {
+  margin-top: 0.875rem;
+  max-width: 60ch;
+}
+
+.quotes {
+  display: grid;
+  gap: 0.875rem;
+  margin-top: 1.25rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-rule);
+}
+
+.kbdHint {
+  margin-top: 0.75rem;
+  color: var(--color-ink-2);
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.05em 0.4em;
+  border: 1px solid var(--color-rule);
+  border-radius: 4px;
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+}
+
+.mobileBar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.625rem 0 calc(0.625rem + env(safe-area-inset-bottom));
+  background: var(--color-paper);
+  border-top: 1px solid var(--color-rule);
+}
+
+.mobileBar :global(.btn) {
+  padding-inline: 0.85em;
+}
+
+/* ---------- Evidence ledger ---------- */
+
+.ledger {
+  border-top: 1px solid var(--color-rule);
+  padding: 1rem 0 1.25rem;
+}
+
+.ledgerHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.ledgerTitle {
+  font-weight: 650;
+}
+
+.ledgerNote {
+  color: var(--color-ink-2);
+}
+
+.ledgerList {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+@media (min-width: 40rem) {
+  .ledgerList {
+    columns: 2;
+    column-gap: 1.25rem;
+  }
+}
+
+.ledgerItem {
+  position: relative;
+  isolation: isolate;
+  break-inside: avoid;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  padding: 0.3rem 0.4rem 0.3rem 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+.ledgerItem::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 4px;
+  background: var(--color-caret-soft);
+  opacity: 0;
+  transition: opacity 160ms var(--ease-decode);
+}
+
+/* The attend line: draws beside the entry a marker points at. */
+.ledgerItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3rem;
+  bottom: 0.3rem;
+  width: 2px;
+  background: var(--color-caret);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 220ms var(--ease-decode);
+}
+
+.ledgerItem[data-lit]::after {
+  opacity: 0.6;
+}
+
+.ledgerItem[data-lit]::before {
+  transform: scaleY(1);
+}
+
+.ledgerFresh::after {
+  animation: fresh 1400ms var(--ease-decode);
+}
+
+@keyframes fresh {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.ledgerNo {
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-size: 0.75rem;
+  color: var(--color-caret);
+  padding-top: 0.1em;
+}
+
+.ledgerLabel {
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+}
+
+.ledgerCite {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  color: var(--color-ink-2);
+  font-size: 0.6875rem;
+  overflow-wrap: anywhere;
+}
+
+.ledgerCite :global(.mono) {
+  font-size: 0.6875rem;
+}
+
+/* File paths are long unbroken mono strings; let them wrap inside their column. */
+.ledgerCite,
+.ledgerCite * {
+  word-break: break-all;
+  white-space: normal;
+}
+
+/* ---------- Audit log ---------- */
+
+.audit {
+  border-top: 1px solid var(--color-rule);
+  padding: 1rem 0 1.25rem;
+}
+
+.auditNote {
+  margin-top: 0.25rem;
+  color: var(--color-ink-2);
+  max-width: 64ch;
+}
+
+.auditTable {
+  width: 100%;
+  margin-top: 0.75rem;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-stretch: 87.5%;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.auditTable th {
+  text-align: left;
+  font-family: var(--font-sans);
+  font-stretch: 100%;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--color-ink-2);
+  padding: 0.35rem 0.75rem 0.35rem 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.auditTable td {
+  padding: 0.4rem 0.75rem 0.4rem 0;
+  border-bottom: 1px solid var(--color-rule);
+  color: var(--color-ink);
+}
+
+.auditRowNew td {
+  animation: rowIn 600ms var(--ease-decode);
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 64rem) {
+  .mobileBar {
+    display: none;
+  }
+}

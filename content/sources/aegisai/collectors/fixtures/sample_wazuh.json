@@ -1,0 +1,17 @@
+{
+  "agents": [
+    {"id": "001", "name": "web-server-01", "ip": "10.0.1.21", "os": {"name": "Ubuntu", "version": "22.04"}, "version": "Wazuh v4.9.0", "status": "active", "lastKeepAlive": "2026-06-16T08:30:00"},
+    {"id": "002", "name": "db-server-01", "ip": "10.0.1.22", "os": {"name": "CentOS", "version": "7"}, "version": "Wazuh v4.9.0", "status": "active", "lastKeepAlive": "2026-06-16T08:29:00"},
+    {"id": "003", "name": "workstation-07", "ip": "10.0.2.55", "os": {"name": "Microsoft Windows 11", "version": "10.0.22631"}, "version": "Wazuh v4.9.0", "status": "disconnected", "lastKeepAlive": "2026-06-15T19:02:00"}
+  ],
+  "alerts": [
+    {"_id": "alert-0001", "_source": {"@timestamp": "2026-06-16T08:25:11", "agent": {"id": "001", "name": "web-server-01"}, "rule": {"id": "100210", "level": 12, "description": "Possible SQL injection against public-facing web application", "mitre": {"id": ["T1190"]}}, "decoder": {"name": "web-accesslog"}, "location": "/var/log/nginx/access.log"}},
+    {"_id": "alert-0002", "_source": {"@timestamp": "2026-06-16T08:20:03", "agent": {"id": "001", "name": "web-server-01"}, "rule": {"id": "100305", "level": 13, "description": "Command and scripting interpreter execution via web shell", "mitre": {"id": ["T1059", "T1505.003"]}}, "decoder": {"name": "auditd"}, "location": "auditd"}},
+    {"_id": "alert-0003", "_source": {"@timestamp": "2026-06-16T07:58:44", "agent": {"id": "003", "name": "workstation-07"}, "rule": {"id": "100410", "level": 10, "description": "Cross-site scripting payload detected in browser process", "mitre": {"id": ["T1059.007"]}}, "decoder": {"name": "windows_eventchannel"}, "location": "EventChannel"}},
+    {"_id": "alert-0004", "_source": {"@timestamp": "2026-06-16T06:40:19", "agent": {"id": "003", "name": "workstation-07"}, "rule": {"id": "100520", "level": 14, "description": "Ransomware behaviour: mass file encryption detected", "mitre": {"id": ["T1486"]}}, "decoder": {"name": "syscheck"}, "location": "syscheck"}},
+    {"_id": "alert-0005", "_source": {"@timestamp": "2026-06-16T05:12:30", "agent": {"id": "002", "name": "db-server-01"}, "rule": {"id": "100610", "level": 11, "description": "Exploitation for privilege escalation attempt", "mitre": {"id": ["T1068"]}}, "decoder": {"name": "auditd"}, "location": "auditd"}},
+    {"_id": "alert-0006", "_source": {"@timestamp": "2026-06-16T04:05:02", "agent": {"id": "002", "name": "db-server-01"}, "rule": {"id": "100120", "level": 8, "description": "Multiple authentication failures (brute force)", "mitre": {"id": ["T1110"]}}, "decoder": {"name": "sshd"}, "location": "/var/log/secure"}},
+    {"_id": "alert-0007", "_source": {"@timestamp": "2026-06-15T22:48:55", "agent": {"id": "001", "name": "web-server-01"}, "rule": {"id": "100710", "level": 9, "description": "Denial of service condition on web service", "mitre": {"id": ["T1499"]}}, "decoder": {"name": "web-accesslog"}, "location": "/var/log/nginx/error.log"}},
+    {"_id": "alert-0008", "_source": {"@timestamp": "2026-06-15T20:15:00", "agent": {"id": "003", "name": "workstation-07"}, "rule": {"id": "100020", "level": 3, "description": "Windows logon success", "mitre": {"id": []}}, "decoder": {"name": "windows_eventchannel"}, "location": "EventChannel"}}
+  ]
+}

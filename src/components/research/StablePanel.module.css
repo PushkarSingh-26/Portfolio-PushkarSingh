@@ -1,0 +1,17 @@
+.stack {
+  display: grid;
+}
+
+.stack > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.sizer {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.live {
+  align-self: start;
+}

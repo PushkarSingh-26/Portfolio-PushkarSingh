@@ -1,0 +1,130 @@
+.row {
+  display: grid;
+  row-gap: 1.25rem;
+  max-width: 40rem;
+}
+
+.headline {
+  font-size: 1.0625rem;
+  font-weight: 560;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+/* ---------- Compound: diverging axis ---------- */
+
+.axis {
+  position: relative;
+  height: 40px;
+  margin-top: 0.25rem;
+}
+
+.value {
+  position: absolute;
+  top: 0;
+  padding-right: 8px;
+  line-height: 1.2;
+  color: var(--r-ink);
+  white-space: nowrap;
+}
+
+.axisLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30px;
+  height: 1px;
+  background: var(--r-rule);
+}
+
+.tick {
+  position: absolute;
+  top: 25px;
+  width: 1px;
+  height: 11px;
+  margin-left: -0.5px;
+  background: var(--r-ink-3);
+}
+
+/* Anchored at zero, rounded only at the data end. */
+.bar {
+  position: absolute;
+  top: 26px;
+  height: 9px;
+  background: var(--r-line-ml);
+  border-radius: 0 4px 4px 0;
+}
+
+.barNeg {
+  border-radius: 4px 0 0 4px;
+}
+
+.marker {
+  position: absolute;
+  top: 16px;
+  width: 2px;
+  height: 24px;
+  margin-left: -1px;
+  background: var(--r-ink);
+}
+
+.axisLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.3rem;
+  color: var(--r-ink-2);
+}
+
+/* ---------- Negative / neutral / positive: one 100% bar ---------- */
+
+.stack {
+  display: flex;
+  gap: 2px;
+  height: 12px;
+  margin-top: 0.6rem;
+}
+
+.seg {
+  flex-basis: 0;
+  min-width: 2px;
+}
+
+.seg:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.seg:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+/* Diverging: the two poles in distinct hues, neutral in the grey between. */
+.neg {
+  background: var(--r-ink);
+}
+
+.neu {
+  background: var(--r-ink-3);
+}
+
+.pos {
+  background: var(--r-line-ml);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+}

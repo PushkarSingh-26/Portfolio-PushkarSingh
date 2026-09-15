@@ -1,0 +1,88 @@
+import type { WorkItem } from "./types";
+
+/** Every piece of work the capability map can point at. Order = display order. */
+export const work: WorkItem[] = [
+  {
+    id: "sigma-llm",
+    title: "Sigma rule LLM",
+    kind: "project",
+    context: "QLoRA fine-tuning, compiler-checked",
+    when: "Aug 2026 – present",
+    href: "/work/sigma-llm",
+    area: "llm",
+  },
+  {
+    id: "aegisai",
+    title: "AegisAI",
+    kind: "project",
+    context: "Threat intelligence and SOC platform",
+    when: "June – Aug 2026",
+    href: "/work/aegisai",
+    area: "applied",
+  },
+  {
+    id: "codec",
+    title: "Codec Networks",
+    kind: "role",
+    context: "Product Development Intern, then AI Automation Developer",
+    when: "Jan 2026 – present",
+    href: "/#experience-codec",
+    area: "genai",
+  },
+  {
+    id: "paper-agents",
+    title: "AI agents for corporate work",
+    kind: "paper",
+    context: "Research paper, SRM",
+    when: "MCA research",
+    href: "/research/ai-agents-corporate-workload",
+    area: "genai",
+  },
+  {
+    id: "rento",
+    title: "Rento India",
+    kind: "role",
+    context: "Founding AI Application Developer Intern",
+    when: "Mar – Sept 2025",
+    href: "/#experience-rento",
+    area: "genai",
+  },
+  {
+    id: "finance-pilot",
+    title: "Finance Pilot",
+    kind: "project",
+    context: "AI stock-market assistant with RAG",
+    when: "Project",
+    href: "/#finance-pilot",
+    area: "genai",
+  },
+  {
+    id: "kisan",
+    title: "Kisan Diary",
+    kind: "product",
+    context: "Freelance, agriculture ERP",
+    when: "In development",
+    href: "/#kisan-diary",
+    area: "applied",
+  },
+  {
+    id: "paper-sentiment",
+    title: "News sentiment and stock prediction",
+    kind: "paper",
+    context: "Research publication, Amity",
+    when: "BCA research",
+    href: "/research/sentiment-stock-prediction",
+    area: "ml",
+  },
+  {
+    id: "globtier",
+    title: "Globtier Infotech",
+    kind: "role",
+    context: "Machine Learning Engineer Intern",
+    when: "June – July 2023",
+    href: "/#experience-globtier",
+    area: "ml",
+  },
+];
+
+export const workById = Object.fromEntries(work.map((w) => [w.id, w])) as Record<string, WorkItem>;

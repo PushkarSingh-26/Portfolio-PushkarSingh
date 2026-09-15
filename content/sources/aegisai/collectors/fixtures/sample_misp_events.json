@@ -1,0 +1,93 @@
+[
+  {
+    "Event": {
+      "id": "101",
+      "uuid": "5f8d1a00-0001-4000-a000-000000000101",
+      "info": "APT29 spearphishing campaign targeting government",
+      "threat_level_id": "1",
+      "analysis": "2",
+      "published": true,
+      "date": "2026-05-02",
+      "Attribute": [
+        {"id": "1001", "uuid": "a-1001", "type": "domain", "value": "cozy-update.example.com", "category": "Network activity", "to_ids": true, "comment": "C2 domain"},
+        {"id": "1002", "uuid": "a-1002", "type": "ip-dst", "value": "203.0.113.10", "category": "Network activity", "to_ids": true, "comment": "C2 IP"},
+        {"id": "1003", "uuid": "a-1003", "type": "md5", "value": "44d88612fea8a8f36de82e1278abb02f", "category": "Payload delivery", "to_ids": true, "comment": "Dropper"},
+        {"id": "1004", "uuid": "a-1004", "type": "email-src", "value": "hr@cozy-update.example.com", "category": "Payload delivery", "to_ids": false, "comment": "Phishing sender"}
+      ],
+      "Galaxy": [
+        {"type": "threat-actor", "GalaxyCluster": [
+          {"value": "APT29", "uuid": "ta-apt29", "description": "Russian state-sponsored group (Cozy Bear)."}
+        ]},
+        {"type": "malware", "GalaxyCluster": [
+          {"value": "WellMess", "uuid": "mw-wellmess", "description": "Cross-platform RAT used by APT29."}
+        ]},
+        {"type": "campaign", "GalaxyCluster": [
+          {"value": "SolarFlare 2026", "uuid": "cmp-solarflare", "description": "Supply-chain intrusion campaign."}
+        ]},
+        {"type": "mitre-attack-pattern", "GalaxyCluster": [
+          {"value": "Phishing", "uuid": "tp-t1566", "meta": {"external_id": ["T1566"]}},
+          {"value": "Command and Scripting Interpreter", "uuid": "tp-t1059", "meta": {"external_id": ["T1059"]}}
+        ]}
+      ]
+    }
+  },
+  {
+    "Event": {
+      "id": "102",
+      "uuid": "5f8d1a00-0002-4000-a000-000000000102",
+      "info": "APT28 exploitation of public-facing application",
+      "threat_level_id": "1",
+      "analysis": "1",
+      "published": true,
+      "date": "2026-05-10",
+      "Attribute": [
+        {"id": "1101", "uuid": "a-1101", "type": "url", "value": "http://fancy-host.example.net/login", "category": "Network activity", "to_ids": true, "comment": "Exploit URL"},
+        {"id": "1102", "uuid": "a-1102", "type": "sha256", "value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "category": "Payload installation", "to_ids": true, "comment": "Implant"},
+        {"id": "1103", "uuid": "a-1103", "type": "ip-dst", "value": "198.51.100.23", "category": "Network activity", "to_ids": true, "comment": "Staging server"}
+      ],
+      "Galaxy": [
+        {"type": "threat-actor", "GalaxyCluster": [
+          {"value": "APT28", "uuid": "ta-apt28", "description": "Russian military intelligence group (Fancy Bear)."}
+        ]},
+        {"type": "malware", "GalaxyCluster": [
+          {"value": "X-Agent", "uuid": "mw-xagent", "description": "Modular implant used by APT28."}
+        ]},
+        {"type": "mitre-attack-pattern", "GalaxyCluster": [
+          {"value": "Exploit Public-Facing Application", "uuid": "tp-t1190", "meta": {"external_id": ["T1190"]}},
+          {"value": "Exploitation for Client Execution", "uuid": "tp-t1203", "meta": {"external_id": ["T1203"]}}
+        ]}
+      ]
+    }
+  },
+  {
+    "Event": {
+      "id": "103",
+      "uuid": "5f8d1a00-0003-4000-a000-000000000103",
+      "info": "LockBit ransomware affiliate activity",
+      "threat_level_id": "1",
+      "analysis": "2",
+      "published": true,
+      "date": "2026-05-20",
+      "Attribute": [
+        {"id": "1201", "uuid": "a-1201", "type": "filename", "value": "lockbit_decrypt.exe", "category": "Payload delivery", "to_ids": true, "comment": "Ransomware binary"},
+        {"id": "1202", "uuid": "a-1202", "type": "domain", "value": "lockbit-leak.example.org", "category": "Network activity", "to_ids": true, "comment": "Leak site"},
+        {"id": "1203", "uuid": "a-1203", "type": "btc", "value": "1BoatSLRHtKNngkdXEeobR76b53LETtpyT", "category": "Financial fraud", "to_ids": false, "comment": "Ransom wallet"}
+      ],
+      "Galaxy": [
+        {"type": "threat-actor", "GalaxyCluster": [
+          {"value": "LockBit Gang", "uuid": "ta-lockbit", "description": "Ransomware-as-a-service operator."}
+        ]},
+        {"type": "ransomware", "GalaxyCluster": [
+          {"value": "LockBit", "uuid": "mw-lockbit", "description": "Prolific ransomware family."}
+        ]},
+        {"type": "campaign", "GalaxyCluster": [
+          {"value": "LockBit Affiliate Wave 2026", "uuid": "cmp-lockbit", "description": "Coordinated affiliate intrusion set."}
+        ]},
+        {"type": "mitre-attack-pattern", "GalaxyCluster": [
+          {"value": "Data Encrypted for Impact", "uuid": "tp-t1486", "meta": {"external_id": ["T1486"]}},
+          {"value": "Command and Scripting Interpreter", "uuid": "tp-t1059b", "meta": {"external_id": ["T1059"]}}
+        ]}
+      ]
+    }
+  }
+]

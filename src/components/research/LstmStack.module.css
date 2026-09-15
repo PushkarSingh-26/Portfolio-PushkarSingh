@@ -1,0 +1,52 @@
+.io {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr auto;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+}
+
+.stack {
+  display: grid;
+  gap: 6px;
+  margin-left: 3rem;
+}
+
+.layer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+}
+
+/* Recurrent layers carry the machine-learning tint; dropout recedes; the output is outlined. */
+.layer[data-kind="lstm"] {
+  background: var(--color-tint-ml);
+}
+
+.layer[data-kind="dropout"] {
+  padding-block: 0.3rem;
+  margin-inline: 0.9rem;
+  background: var(--color-paper-2);
+}
+
+.layer[data-kind="dense"] {
+  border: 1.5px solid var(--color-ink);
+}
+
+@media (max-width: 480px) {
+  .io {
+    grid-template-columns: 2.25rem 1fr;
+  }
+
+  .io > :last-child {
+    grid-column: 2;
+  }
+
+  .stack {
+    margin-left: 0;
+  }
+}
