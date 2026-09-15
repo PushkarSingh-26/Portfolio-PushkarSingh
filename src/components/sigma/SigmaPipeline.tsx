@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type RefObject } from "react";
 import { m } from "motion/react";
 import { sigmaStages } from "@/content/sigma";
-import { Cite } from "@/components/ui/Evidence";
 import { useInViewOnce, usePrefersReducedMotion } from "@/lib/hooks";
 import { StageVisual } from "./StageVisuals";
 import s from "./sigma.module.css";
@@ -176,7 +175,6 @@ function MobileStage({ index, idPrefix }: { index: number; idPrefix: string }) {
       <div className={s.mPanel}>
         <StageVisual id={st.id} active={inView} />
       </div>
-      <Cite evidence={st.evidence} className="mt-4 block" />
     </li>
   );
 }
@@ -337,7 +335,6 @@ export function SigmaPipeline({ idPrefix = "sigma", className = "" }: { idPrefix
               </p>
               <h3 className="h-sub mt-4">{st.title}</h3>
               <p className="body-2 mt-3">{st.body}</p>
-              <Cite evidence={st.evidence} className="mt-4 block" />
             </li>
           ))}
         </ol>

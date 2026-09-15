@@ -22,7 +22,7 @@ import {
   type Provider,
   type StageId,
 } from "@/content/aegis";
-import { EvidenceQuote, sourceHref } from "@/components/ui/Evidence";
+import { EvidenceQuote } from "@/components/ui/Evidence";
 import { useCanHover, usePrefersReducedMotion } from "@/lib/hooks";
 import { AlertArtifact, CorrelationArtifact, EvidenceArtifact, GraphArtifact, RiskArtifact } from "./Artifacts";
 import { AnalystArtifact } from "./AnalystArtifact";
@@ -365,7 +365,6 @@ function Ledger({ reached, fresh }: { reached: number; fresh: ReadonlySet<StageI
       </div>
       <ol className={styles.ledgerList}>
         {visible.map(({ e, n }) => {
-          const href = sourceHref(e.evidence);
           return (
             <li
               key={e.id}
@@ -378,14 +377,6 @@ function Ledger({ reached, fresh }: { reached: number; fresh: ReadonlySet<StageI
               <span className={styles.ledgerNo}>[{n}]</span>
               <span>
                 <span className={`${styles.ledgerLabel} ${e.mono ? "mono" : ""}`}>{e.label}</span>
-                {href && (
-                  <a className={`link ${styles.ledgerCite}`} href={href} target="_blank" rel="noreferrer">
-                    <span className="sr-only">Source: {e.evidence.file}</span>
-                    <span className="mono" aria-hidden="true" title={e.evidence.file}>
-                      {e.evidence.file?.split("/").pop()}
-                    </span>
-                  </a>
-                )}
               </span>
             </li>
           );

@@ -5,7 +5,6 @@ import { useId, useState } from "react";
 import { capabilities } from "@/content/capabilities";
 import { timeline, NOW, type TimelineEntry } from "@/content/experience";
 import type { Area } from "@/content/types";
-import { Cite } from "@/components/ui/Evidence";
 import { Section } from "@/components/ui/Section";
 import { areaTint } from "@/components/ui/Token";
 import { usePrefersReducedMotion } from "@/lib/hooks";
@@ -108,7 +107,6 @@ function StepDetail({ entry }: { entry: TimelineEntry }) {
             </li>
           ))}
         </ul>
-        <Cite evidence={entry.points[0]} />
         {entry.id === "codec" && <RagFlow />}
         {entry.href && (
           <p className="mt-6">

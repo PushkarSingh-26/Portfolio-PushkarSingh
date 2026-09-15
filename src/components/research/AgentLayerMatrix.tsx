@@ -4,7 +4,7 @@ import { m } from "motion/react";
 import { useId, useRef, useState, type KeyboardEvent, type RefObject } from "react";
 import { agentsPaper } from "@/content/research";
 import type { Evidence } from "@/content/types";
-import { Cite, EvidenceQuote } from "@/components/ui/Evidence";
+import { EvidenceQuote } from "@/components/ui/Evidence";
 import { useCanHover, usePrefersReducedMotion } from "@/lib/hooks";
 import { StablePanel } from "./StablePanel";
 import { researchVars, rovingIndex } from "./tokens";
@@ -56,9 +56,6 @@ function AgentReadout({ agent }: { agent: Agent }) {
           </div>
         ))}
       </dl>
-      <p className={styles.readCite}>
-        <Cite evidence={cellOf(agent, "ingest")} />
-      </p>
     </div>
   );
 }
@@ -366,7 +363,6 @@ export function AgentLayerMatrix({
         ) : (
           <p className={styles.tableCite}>
             <span className="small text-ink-2">Every cell is quoted from the paper. </span>
-            <Cite evidence={sharedBackbone} />
           </p>
         )}
       </div>
@@ -441,9 +437,6 @@ export function AgentLayerMatrix({
               </li>
             ))}
           </ol>
-          <p className={styles.readCite}>
-            <Cite evidence={cellOf(tabAgent, "ingest")} />
-          </p>
         </div>
       </div>
     </div>

@@ -19,7 +19,6 @@ import {
   t1190Rule,
   type GraphNode,
 } from "@/content/aegis";
-import { Cite } from "@/components/ui/Evidence";
 import { ModelVersions } from "./ModelVersions";
 import { Ref, Refs, useJourney } from "./shared";
 import { WeightBar } from "./WeightBar";
@@ -30,8 +29,7 @@ export function AlertArtifact() {
   return (
     <div className={styles.stack}>
       <p className={styles.caption}>
-        Each field of the fixture record, and the column the parser writes it to.{" "}
-        <Cite evidence={sampleAlert.record} />
+        Each field of the fixture record, and the column the parser writes it to.
       </p>
       <div className={styles.record}>
         <div className={styles.recordHead}>
@@ -46,7 +44,7 @@ export function AlertArtifact() {
       </div>
       <p className={styles.caption}>
         The parser keeps the hit's <code className="mono">_source</code> as <code className="mono">raw_event</code> and copies these fields into
-        columns. <Cite evidence={sampleAlert.parserEvidence} />
+        columns.
       </p>
     </div>
   );
@@ -96,8 +94,7 @@ export function EvidenceArtifact() {
         </div>
       </div>
       <p className={styles.caption}>
-        Values in the enrichment come from the platform&apos;s database, so this page leaves them blank.{" "}
-        <Cite evidence={enrichmentKeys.evidence} />
+        Values in the enrichment come from the platform&apos;s database, so this page leaves them blank.
       </p>
       <div>
         <p className={styles.label}>Sources the platform collects from</p>
@@ -138,7 +135,6 @@ export function CorrelationArtifact() {
             The rule for the alert&apos;s technique
             <Refs ids={["rule"]} />
           </span>
-          <Cite evidence={t1190Rule.evidence} />
         </div>
         <div className="scroll-x mt-2">
           <pre className={styles.code}>
@@ -179,7 +175,7 @@ export function CorrelationArtifact() {
       </div>
       <p className={styles.caption}>
         Method <code className="mono">rule-based-keyword-v1</code>
-        <Ref id="method" />. <Cite evidence={noisyOr.bucketsEvidence} />
+        <Ref id="method" />.
       </p>
 
       <div>
@@ -189,7 +185,7 @@ export function CorrelationArtifact() {
             <div key={ex.call} className={styles.example}>
               <span className={styles.exampleCall}>{ex.call}</span>
               <span className={styles.caption}>
-                {ex.note}. <Cite evidence={ex.evidence} />
+                {ex.note}.
               </span>
             </div>
           ))}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cite, EvidenceQuote } from "@/components/ui/Evidence";
+import { EvidenceQuote } from "@/components/ui/Evidence";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { InvestigationJourney } from "@/components/aegis/InvestigationJourney";
@@ -51,7 +51,7 @@ export default function AegisCaseStudy() {
           <>
             <p>{aegisIntro.purpose.quote}</p>
             <p className="small body-2 mt-3">
-              {aegisIntro.repoName} <Cite evidence={aegisIntro.purpose} />
+              {aegisIntro.repoName}
             </p>
           </>
         }
@@ -107,15 +107,14 @@ export default function AegisCaseStudy() {
                 <li className={styles.providerRow}>
                   <span className="mono">none</span>
                   <span className="body-2">
-                    The default: deterministic answers, no keys. <Cite evidence={providerFacts.noneDefault} />
+                    The default: deterministic answers, no keys.
                   </span>
                 </li>
                 {(Object.keys(providerFacts.models) as (keyof typeof providerFacts.models)[]).map((p) => (
                   <li key={p} className={styles.providerRow}>
                     <span className="mono">{p}</span>
                     <span className="body-2">
-                      Narrates the evidence. Default model <code className="mono">{providerFacts.models[p].model}</code>.{" "}
-                      <Cite evidence={providerFacts.models[p].evidence} />
+                      Narrates the evidence. Default model <code className="mono">{providerFacts.models[p].model}</code>.
                     </span>
                   </li>
                 ))}
@@ -159,8 +158,7 @@ export default function AegisCaseStudy() {
               </div>
               <p className={`body-2 ${styles.auditFields}`}>
                 Each audit row records <code className="mono">recommendation_id</code>, <code className="mono">event</code>,{" "}
-                <code className="mono">actor</code>, <code className="mono">detail</code> and a timestamp.{" "}
-                <Cite evidence={auditFacts.columns} />
+                <code className="mono">actor</code>, <code className="mono">detail</code> and a timestamp.
               </p>
             </div>
             <div className={`${styles.colSide} ${styles.container}`}>
@@ -192,7 +190,7 @@ export default function AegisCaseStudy() {
               <h3 className="h-sub">Six versions, each adding a signal</h3>
               <p className="body-2 mt-3">
                 The top feature moves from raw severity toward exploitation evidence and then graph structure. The
-                model itself is XGBoost, with RandomForest as a fallback. <Cite evidence={weakSupervision.model} />
+                model itself is XGBoost, with RandomForest as a fallback.
               </p>
               <div className="mt-5">
                 <ModelVersions />
@@ -203,8 +201,7 @@ export default function AegisCaseStudy() {
                 <WeightBar name={cvePriority.name} note={cvePriority.note} parts={cvePriority.parts} refs={false} />
               </div>
               <p className="small body-2 mt-5">
-                A CISA KEV listing overrides both: <code className="mono">{kevOverride.formula}</code>.{" "}
-                <Cite evidence={kevOverride.evidence} />
+                A CISA KEV listing overrides both: <code className="mono">{kevOverride.formula}</code>.
               </p>
             </div>
           </div>
@@ -222,7 +219,6 @@ export default function AegisCaseStudy() {
                   {g.items.map((it) => (
                     <li key={it.label} className={styles.stackItem}>
                       {it.label}
-                      <Cite evidence={it.evidence} className={styles.stackSource} />
                     </li>
                   ))}
                 </ul>
@@ -239,7 +235,6 @@ export default function AegisCaseStudy() {
             {limits.map((l) => (
               <li key={l.text} className={styles.limit}>
                 <p className={styles.limitText}>{l.text}</p>
-                <Cite evidence={l.evidence} className="block mt-1" />
               </li>
             ))}
           </ul>

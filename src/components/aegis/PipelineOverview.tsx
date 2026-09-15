@@ -1,5 +1,4 @@
 import { stages } from "@/content/aegis";
-import { Cite } from "@/components/ui/Evidence";
 import styles from "./Aegis.module.css";
 
 /** The nine stages as one labelled track, with the optional LLM and the human step marked. */
@@ -13,7 +12,7 @@ export function PipelineOverview() {
           <div className={styles.pBody}>
             <span className={styles.pName}>{s.name}</span>
             <p className={`small ${styles.pText}`}>
-              {s.oneLine} <Cite evidence={s.overviewEvidence} />
+              {s.oneLine}
             </p>
             <span className={`mono ${styles.pComponent}`}>{s.component}</span>
             {s.id === "analyst" && (

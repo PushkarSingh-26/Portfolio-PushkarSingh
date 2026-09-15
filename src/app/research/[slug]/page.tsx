@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { agentsPaper, papers, sentimentPaper } from "@/content/research";
-import { Cite, EvidenceQuote } from "@/components/ui/Evidence";
+import { EvidenceQuote } from "@/components/ui/Evidence";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Token } from "@/components/ui/Token";
@@ -172,9 +172,6 @@ function AgentsBody() {
             </tbody>
           </table>
         </div>
-        <p className="mt-3">
-          <Cite evidence={p.reportedTimes[0].evidence} />
-        </p>
       </Part>
     </>
   );
@@ -212,8 +209,7 @@ function SentimentBody() {
         <DataSplit className="mt-4" />
         <p className="small text-ink-2 mt-4 measure">
           These are the paper&apos;s figures. The notebook in the repository is a separate run, with{" "}
-          <span className="mono text-ink">3,913</span> training and <span className="mono text-ink">977</span> test rows.{" "}
-          <Cite evidence={p.codeRunSplit} />
+          <span className="mono text-ink">3,913</span> training and <span className="mono text-ink">977</span> test rows.
         </p>
 
         <h3 className="font-semibold mt-14">Sentiment scores</h3>
@@ -225,9 +221,6 @@ function SentimentBody() {
           </figcaption>
           <div className="quote-mark mt-2">
             <blockquote className="small text-ink">“{meaning}”</blockquote>
-            <p className="mt-1">
-              <Cite evidence={p.vaderScale} />
-            </p>
           </div>
         </figure>
       </Part>

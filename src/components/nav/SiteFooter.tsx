@@ -6,8 +6,7 @@ export function SiteFooter() {
     <footer className="no-print border-t border-rule mt-8">
       <div className="wrap py-10 md:py-14 grid gap-8 md:grid-cols-12">
         <p className="small text-ink-2 md:col-span-6 measure">
-          Every quote on this site is checked against my résumé, papers and project documentation each time the site
-          builds. Illustrations and demo data are labelled where they appear.
+          Illustrations and demo data are labelled where they appear.
         </p>
         <ul className="small md:col-span-6 flex flex-wrap gap-x-6 gap-y-2 md:justify-end">
           <li>

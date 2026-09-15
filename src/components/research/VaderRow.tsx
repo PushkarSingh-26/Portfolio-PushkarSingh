@@ -1,5 +1,4 @@
 import { sentimentPaper } from "@/content/research";
-import { Cite } from "@/components/ui/Evidence";
 import { researchVars } from "./tokens";
 import styles from "./VaderRow.module.css";
 
@@ -74,7 +73,7 @@ export function VaderRow({ className = "" }: { className?: string }) {
       </div>
 
       <figcaption className="small text-ink-2">
-        One row from the paper&rsquo;s results (Figure 4). <Cite evidence={row.evidence} />
+        One row from the paper&rsquo;s results (Figure 4).
       </figcaption>
     </figure>
   );

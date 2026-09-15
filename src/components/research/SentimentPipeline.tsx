@@ -2,7 +2,6 @@
 
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { sentimentPaper } from "@/content/research";
-import { Cite } from "@/components/ui/Evidence";
 import { useCanHover, usePrefersReducedMotion } from "@/lib/hooks";
 import { StablePanel } from "./StablePanel";
 import { VaderRow } from "./VaderRow";
@@ -34,9 +33,6 @@ function StepReadout({ step, index }: { step: Step; index: number }) {
       </div>
       <div className={styles.readBody}>
         <p className="small text-ink-2">{step.detail}</p>
-        <p className="mt-1">
-          <Cite evidence={step.evidence} />
-        </p>
         {step.id === "vader" && <VaderRow className={styles.vader} />}
       </div>
     </div>
@@ -146,9 +142,6 @@ function PipelineList() {
           <div className={styles.listBody}>
             <p className={styles.listName}>{s.name}</p>
             <p className="body-2 mt-1">{s.detail}</p>
-            <p className="mt-1.5">
-              <Cite evidence={s.evidence} />
-            </p>
           </div>
         </li>
       ))}

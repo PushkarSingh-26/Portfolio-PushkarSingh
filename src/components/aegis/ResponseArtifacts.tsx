@@ -9,7 +9,6 @@ import {
   simulationLabel,
   type GateAction,
 } from "@/content/aegis";
-import { Cite } from "@/components/ui/Evidence";
 import { REC_ID, recTitle, type AuditRow, type Reply, type SimState } from "./responseSim";
 import { Ref, useJourney } from "./shared";
 import { StateMachine } from "./StateMachine";
@@ -43,10 +42,10 @@ export function RecommendationArtifact({ sim }: { sim: SimState }) {
         </dl>
       </article>
       <p className={styles.caption}>
-        {recommendation.label} <Cite evidence={recommendation.evidence[0]} />
+        {recommendation.label}
       </p>
       <p className={styles.caption}>
-        {recommendation.otherRules} <Cite evidence={recommendation.otherRulesEvidence} />
+        {recommendation.otherRules}
       </p>
     </div>
   );
@@ -88,7 +87,7 @@ function ReplyBlock({ reply }: { reply: Reply | null }) {
           <div>{reply.body}</div>
           {reply.code === 409 && (
             <p className={styles.replyNote}>
-              Refused. {gateEvidence.refusedNotLogged} <Cite evidence={gateEvidence.to409} />
+              Refused. {gateEvidence.refusedNotLogged}
             </p>
           )}
         </m.div>
@@ -137,8 +136,7 @@ export function GateArtifact({
   return (
     <div className={styles.stack}>
       <p className={styles.caption}>
-        <span className={styles.captionStrong}>{simulationLabel}</span>{" "}
-        <Cite evidence={gateEvidence.endpoint} />
+        <span className={styles.captionStrong}>{simulationLabel}</span>
       </p>
       <StateMachine status={sim.status} animate={!!ctx?.animate} />
       <ActionButtons
@@ -172,8 +170,7 @@ export function GateArtifact({
       <p className={styles.caption}>
         The same guard sits in the engine: <code className="mono">approve</code> and{" "}
         <code className="mono">reject</code> need <code className="mono">pending</code>,{" "}
-        <code className="mono">execute</code> needs <code className="mono">approved</code>.{" "}
-        <Cite evidence={gateEvidence.execute} />
+        <code className="mono">execute</code> needs <code className="mono">approved</code>.
       </p>
     </div>
   );
@@ -221,7 +218,6 @@ export function ResponseArtifact({
         <div className={styles.record}>
           <div className={styles.recordHead}>
             <span className={styles.recordName}>execution_result</span>
-            <Cite evidence={mockExecution.evidence[1]} />
           </div>
           <dl className={styles.kv}>
             <dt>provider</dt>
@@ -234,8 +230,7 @@ export function ResponseArtifact({
             <dd>true</dd>
           </dl>
           <p className={`${styles.caption} mt-2`}>
-            <code className="mono">ticket_id</code> is computed the way MockProvider does it: {mockExecution.derivation}.{" "}
-            <Cite evidence={mockExecution.evidence[0]} />
+            <code className="mono">ticket_id</code> is computed the way MockProvider does it: {mockExecution.derivation}.
           </p>
         </div>
       )}
@@ -256,8 +251,7 @@ export function ResponseArtifact({
           </dl>
           <p className={`${styles.caption} mt-2`}>
             This only confirms the provider accepted the action: a status of created, triggered or accepted, or a
-            ticket id. It says nothing about whether anything changed on a host.{" "}
-            <Cite evidence={mockExecution.verifyRule} />
+            ticket id. It says nothing about whether anything changed on a host.
           </p>
         </div>
       )}
@@ -284,7 +278,7 @@ export function AuditLog({ rows, headingId }: { rows: AuditRow[]; headingId: str
         <Ref id="audit" />
       </h3>
       <p className={`small ${jstyles.auditNote}`}>
-        Simulated rows with the platform&apos;s fields. {auditFacts.actorNote} <Cite evidence={auditFacts.actorEvidence} />
+        Simulated rows with the platform&apos;s fields. {auditFacts.actorNote}
       </p>
       <div className="scroll-x" aria-live="polite">
         <table className={jstyles.auditTable}>

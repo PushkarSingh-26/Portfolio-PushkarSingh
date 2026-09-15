@@ -3,7 +3,6 @@
 import { m } from "motion/react";
 import { useEffect, useRef, type KeyboardEvent } from "react";
 import { providerFacts, stageIndex, stages, type Provider } from "@/content/aegis";
-import { Cite } from "@/components/ui/Evidence";
 import { ProviderSwitch } from "./ProviderSwitch";
 import styles from "./Journey.module.css";
 
@@ -131,13 +130,11 @@ export function JourneyRail({
       <p className={`small ${styles.railCaption}`}>
         {llmOn ? (
           <>
-            Only the AI analyst stage changes: a model narrates the evidence the analyst already gathered. Every other stage is identical.{" "}
-            <Cite evidence={providerFacts.narrate} />
+            Only the AI analyst stage changes: a model narrates the evidence the analyst already gathered. Every other stage is identical.
           </>
         ) : (
           <>
-            <code className="mono">none</code> is the platform default. Every stage below works without an LLM.{" "}
-            <Cite evidence={providerFacts.noneDefault} />
+            <code className="mono">none</code> is the platform default. Every stage below works without an LLM.
           </>
         )}
       </p>

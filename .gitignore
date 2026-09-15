@@ -11,5 +11,6 @@ playwright-report/
 
 # Local / development-only files
 .claude/
-photos/
+# Only the root folder of original photos. The site's own images live in src/photos/ and must be committed.
+/photos/
 content/sources/watchout/

@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { financePilot, routes, chartCountEvidence, type Route } from "@/content/finance-pilot";
-import { Cite } from "@/components/ui/Evidence";
 import styles from "./FinancePilot.module.css";
 
 /**
@@ -36,9 +35,6 @@ export function FinancePilot() {
         </p>
         <h3 className="h-sub mt-2 text-[clamp(1.75rem,3.4vw,2.5rem)]!">{financePilot.title}</h3>
         <p className="mt-4 measure">{financePilot.summary}</p>
-        <p className="mt-3">
-          <Cite evidence={financePilot.summaryEvidence} />
-        </p>
 
         <h4 className="mt-8 small text-ink-2">Built with</h4>
         <ul className="mt-2 flex flex-wrap gap-2" aria-label="Technologies">
@@ -54,7 +50,6 @@ export function FinancePilot() {
           {financePilot.extras.map((x) => (
             <li key={x.text} className="flex flex-wrap items-baseline justify-between gap-x-4 border-b border-rule py-2.5">
               <span className="small">{x.text}</span>
-              <Cite evidence={x.evidence} compact />
             </li>
           ))}
         </ul>
@@ -96,7 +91,7 @@ export function FinancePilot() {
           aria-live="polite"
         >
           <p className="small text-ink-2">
-            Example question{route.exampleFromReadme ? ", from the project's README" : ""}
+            Example question
           </p>
           <p className={styles.question}>{route.example}</p>
 
@@ -110,7 +105,6 @@ export function FinancePilot() {
               >
                 <span className={styles.dot} aria-hidden="true" />
                 <span className={styles.stepText}>{s.text}</span>
-                <Cite evidence={s.evidence} className={styles.stepCite} compact />
               </li>
             ))}
           </ol>
@@ -133,7 +127,7 @@ export function FinancePilot() {
         </div>
 
         <p className="mt-4 small text-ink-2">
-          {chartTotal} chart types in all, each drawn by its own Plotly function. <Cite evidence={chartCountEvidence} />
+          {chartTotal} chart types in all, each drawn by its own Plotly function.
         </p>
       </div>
     </div>

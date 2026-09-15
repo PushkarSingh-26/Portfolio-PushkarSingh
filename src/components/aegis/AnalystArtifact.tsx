@@ -15,7 +15,6 @@ import {
   providerFacts,
   type Provider,
 } from "@/content/aegis";
-import { Cite } from "@/components/ui/Evidence";
 import { ProviderSwitch } from "./ProviderSwitch";
 import { Ref, Refs, useJourney } from "./shared";
 import styles from "./Artifacts.module.css";
@@ -56,7 +55,6 @@ export function AnalystArtifact({
             Tool registry, 12 read-only tools
             <Ref id="tools" />
           </span>
-          <Cite evidence={agentToolsEvidence} />
         </div>
         <ul className={styles.tools}>
           {agentTools.map((t) => {
@@ -77,7 +75,7 @@ export function AnalystArtifact({
           })}
         </ul>
         <p className={styles.refusal}>
-          {fenceRefusal.text} <Cite evidence={fenceRefusal.evidence} />
+          {fenceRefusal.text}
         </p>
       </section>
 
@@ -151,8 +149,7 @@ export function AnalystArtifact({
           )}
         </div>
         <p className={`${styles.caption} mt-2`}>
-          Steps that need <code className="mono">$cve_id</code> take it from step 2&apos;s output.{" "}
-          <Cite evidence={planSkipEvidence} /> <Cite evidence={planAfterEvidence} />
+          Steps that need <code className="mono">$cve_id</code> take it from step 2&apos;s output.
         </p>
       </section>
 
@@ -213,7 +210,7 @@ export function AnalystArtifact({
               ))}
             </p>
             <p className={`${styles.caption} mt-2`}>
-              The prompt tells the model to “{providerFacts.prompt.quote}” <Cite evidence={providerFacts.prompt} />
+              The prompt tells the model to “{providerFacts.prompt.quote}”
             </p>
           </m.div>
         )}
@@ -226,7 +223,7 @@ export function AnalystArtifact({
               </>
             ) : (
               <>
-                Grounded summary, returned instead if the provider fails. <Cite evidence={providerFacts.fallback} />
+                Grounded summary, returned instead if the provider fails.
               </>
             )}
           </p>

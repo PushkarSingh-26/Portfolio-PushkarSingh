@@ -2,7 +2,6 @@ import { achievements, beyondWork, leadership } from "@/content/recognition";
 import { achievementPhotos } from "@/content/photos";
 import { PhotoEvidence } from "./PhotoEvidence";
 import { education } from "@/content/experience";
-import { Cite } from "@/components/ui/Evidence";
 import { Section } from "@/components/ui/Section";
 
 /** A precise results list — the type does the work, no badges. */
@@ -38,9 +37,6 @@ export function RecognitionSection() {
                 </li>
               ))}
             </ul>
-            <p className="mt-3">
-              <Cite evidence={achievements[0].evidence} />
-            </p>
           </div>
 
           <div className="lg:col-span-4 lg:col-start-9">
@@ -67,16 +63,10 @@ export function RecognitionSection() {
                     </div>
                   ))}
                 </dl>
-                <p className="mt-2">
-                  <Cite evidence={beyondWork.karate.evidence} />
-                </p>
               </li>
               <li className="border-b border-rule py-4">
                 <p className="font-semibold">{beyondWork.esports.title}</p>
                 <p className="small text-ink-2">{beyondWork.esports.result}</p>
-                <p className="mt-2">
-                  <Cite evidence={beyondWork.esports.evidence} />
-                </p>
               </li>
             </ul>
           </div>

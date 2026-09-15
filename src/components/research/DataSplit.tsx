@@ -1,5 +1,4 @@
 import { sentimentPaper } from "@/content/research";
-import { Cite } from "@/components/ui/Evidence";
 import { researchVars } from "./tokens";
 import styles from "./DataSplit.module.css";
 
@@ -17,7 +16,7 @@ const [TEST_ROWS] = shapeOf(splitTest.quote);
 
 const fmt = (n: number) => n.toLocaleString("en-US");
 
-/** The date-ordered train/test split as one proportional bar, with the source lines. */
+/** The date-ordered train/test split as one proportional bar. */
 export function DataSplit({ className = "" }: { className?: string }) {
   return (
     <figure className={`${styles.figure} ${className}`} style={researchVars}>
@@ -44,14 +43,6 @@ export function DataSplit({ className = "" }: { className?: string }) {
       <p className="small text-ink-2 mt-3">
         A date-ordered split. Both sets have <span className="mono text-ink">{FEATURES}</span> features.
       </p>
-      <pre className={`mono scroll-x ${styles.source}`} tabIndex={0} aria-label="Source lines from the paper">
-        {split.quote}
-        {"\n"}
-        {splitTest.quote}
-      </pre>
-      <figcaption>
-        <Cite evidence={split} />
-      </figcaption>
     </figure>
   );
 }

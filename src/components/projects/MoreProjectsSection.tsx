@@ -1,5 +1,4 @@
 import { kisanDiary } from "@/content/experience";
-import { Cite } from "@/components/ui/Evidence";
 import { Section } from "@/components/ui/Section";
 import { FinancePilot } from "./FinancePilot";
 
@@ -22,9 +21,6 @@ export function MoreProjectsSection() {
             <p className="small text-ink-2">Freelance, in development</p>
             <h3 className="h-sub mt-2 text-[clamp(1.75rem,3.4vw,2.5rem)]!">Kisan Diary</h3>
             <p className="mt-4 measure">{kisanDiary.summary.quote}</p>
-            <p className="mt-3">
-              <Cite evidence={kisanDiary.summary} />
-            </p>
           </div>
           <figure className="lg:col-span-6 lg:col-start-7">
             <div className="rounded-lg border-[1.5px] border-ink p-4 sm:p-6">

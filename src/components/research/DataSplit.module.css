@@ -56,13 +56,3 @@
   height: 10px;
 }
 
-.source {
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
-  padding: 0.85rem 1rem;
-  border-radius: 6px;
-  background: var(--r-paper-2);
-  color: var(--r-ink);
-  line-height: 1.7;
-  white-space: pre;
-}

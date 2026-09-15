@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { sigmaProject } from "@/content/sigma";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
-import { Cite, EvidenceQuote } from "@/components/ui/Evidence";
+import { EvidenceQuote } from "@/components/ui/Evidence";
 import { Token } from "@/components/ui/Token";
 import { BenchmarkTable, StatusLine } from "@/components/sigma/CheckParts";
 import { HarnessDemo } from "@/components/sigma/HarnessDemo";
@@ -97,7 +97,6 @@ export default function SigmaLlmPage() {
                 </div>
               ))}
             </dl>
-            <Cite evidence={sigmaProject.summary} className="mt-4 block" />
           </div>
         </div>
       </Section>

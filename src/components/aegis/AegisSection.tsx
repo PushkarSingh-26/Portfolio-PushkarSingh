@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Cite } from "@/components/ui/Evidence";
 import { Section } from "@/components/ui/Section";
 import { AEGIS_REPO, aegisIntro, aegisPrinciples } from "@/content/aegis";
 import { InvestigationJourney } from "./InvestigationJourney";
@@ -15,7 +14,7 @@ export function AegisSection() {
             <h2 className="h-section">{aegisIntro.title}</h2>
             <p className="lead measure mt-6">{aegisIntro.description}</p>
             <p className="small body-2 measure mt-4">
-              {aegisIntro.repoName} <Cite evidence={aegisIntro.repoNameEvidence} />
+              {aegisIntro.repoName}
             </p>
           </header>
           <div className={styles.principles}>
@@ -25,7 +24,7 @@ export function AegisSection() {
                 <li key={p.id} className={styles.principle}>
                   <p className={styles.principleText}>{p.text}</p>
                   <p className={`small ${styles.principleMeta}`}>
-                    Shown by the {p.device} below. <Cite evidence={p.evidence} />
+                    Shown by the {p.device} below.
                   </p>
                 </li>
               ))}
